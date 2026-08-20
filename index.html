@@ -1,69 +1,192 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Mi Asistente Personal IA</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Asistente Voz Femenina ChatGPT</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
 body{background:#0f172a;color:#e2e8f0;min-height:100vh;display:flex;flex-direction:column}
 .header{padding:12px;text-align:center;background:#1e293b;border-bottom:1px solid #334155}
-.p-btn{padding:6px 12px;border-radius:20px;border:1px solid #334155;background:#1e293b;color:#94a3b8;cursor:pointer;margin:2px;font-size:12px}
-.p-btn.active{background:#0ea5e9;color:#fff}
+.p-btn{padding:7px 13px;border-radius:20px;border:1px solid #334155;background:#1e293b;color:#94a3b8;cursor:pointer;margin:3px;font-size:12px}
+.p-btn.active{background:#ec4899;color:#fff;border-color:#ec4899}
 .modes{padding:8px;background:#1e293b;display:grid;grid-template-columns:1fr 1fr;gap:6px}
-.m-btn{padding:10px;border-radius:10px;border:1px solid #334155;background:#0f172a;color:#cbd5e1;cursor:pointer;font-size:12px;font-weight:600}
-.m-btn.active{background:#22d3ee;color:#0f172a}
-.chat{flex:1;padding:10px;display:flex;flex-direction:column;gap:8px;overflow-y:auto}
-.msg{padding:10px 12px;border-radius:14px;max-width:92%;font-size:14px;line-height:1.4}
+.m-btn{padding:11px;border-radius:10px;border:1px solid #334155;background:#0f172a;color:#cbd5e1;cursor:pointer;font-size:12px;font-weight:700}
+.m-btn.active{background:#f472b6;color:#0f172a}
+.chat{flex:1;padding:12px;display:flex;flex-direction:column;gap:10px;overflow-y:auto;scroll-behavior:smooth}
+.msg{padding:12px 14px;border-radius:18px;max-width:90%;font-size:14px;line-height:1.5;white-space:pre-wrap}
 .bot{background:#1e293b;align-self:flex-start;border:1px solid #334155}
-.user{background:#2563eb;align-self:flex-end;color:#fff}
-.input-area{padding:10px;background:#1e293b;display:flex;gap:6px;border-top:1px solid #334155;align-items:center}
-.input-area input{flex:1;padding:12px;border-radius:10px;border:1px solid #334155;background:#0f172a;color:#fff;outline:none}
-.btn-icon{border:none;padding:12px;border-radius:10px;cursor:pointer;font-size:18px}
-.btn-mic{background:#334155}.btn-mic.on{background:#ef4444}
-.btn-voice{background:#334155}.btn-voice.on{background:#22c55e}
-.btn-send{background:#22c55e;padding:12px 16px;font-weight:800;border:none;border-radius:10px;cursor:pointer}
+.user{background:#ec4899;align-self:flex-end;color:#fff}
+.status{text-align:center;font-size:11px;color:#f9a8d4;padding:6px;background:#1e293b;border-top:1px solid #334155}
+.controls{padding:12px;background:#1e293b;display:flex;flex-direction:column;gap:8px;border-top:1px solid #334155}
+.row{display:flex;gap:8px}
+.row input{flex:1;padding:14px;border-radius:12px;border:1px solid #334155;background:#0f172a;color:#fff;outline:none;font-size:14px}
+.btn{border:none;border-radius:12px;padding:14px;cursor:pointer;font-weight:800}
+.btn-mic{flex:1;background:#ec4899;color:#fff;font-size:16px}
+.btn-mic.listening{background:#ef4444;animation:pulse 1s infinite}
+.btn-stop{background:#334155;color:#fff;padding:14px 16px}
+.btn-send{background:#0ea5e9;color:#fff;padding:14px 18px}
+@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.02)}100%{transform:scale(1)}}
 </style>
 </head>
 <body>
 <div class="header">
-<h3>🧠 Mi Asistente Personal IA</h3>
+<h3>💖 Asistente - Voz Femenina</h3>
 <div style="margin-top:8px">
-<button class="p-btn active" onclick="setP('Adriana',this)">Adriana</button>
-<button class="p-btn" onclick="setP('Adrián',this)">Adrián</button>
-<button class="p-btn" onclick="setP('Familia',this)">Familia</button>
-<button class="p-btn" onclick="setP('Pablo',this)">Pablo</button>
+<button class="p-btn active" onclick="setProfile('Adriana',this)">Adriana</button>
+<button class="p-btn" onclick="setProfile('Adrián',this)">Adrián</button>
+<button class="p-btn" onclick="setProfile('Familia',this)">Familia</button>
+<button class="p-btn" onclick="setProfile('Pablo',this)">Pablo</button>
 </div>
 </div>
 <div class="modes">
-<button class="m-btn" id="btn-conversar" onclick="setM('Conversar')">💬 Conversar</button>
-<button class="m-btn" id="btn-ansiedad" onclick="setM('Ansiedad')">🌿 Ansiedad</button>
-<button class="m-btn" id="btn-toc" onclick="setM('TOC')">🧠 TOC</button>
-<button class="m-btn active" id="btn-familia" onclick="setM('Familia')">❤️ Familia</button>
+<button class="m-btn" id="btn-conversar" onclick="setMode('Conversar')">💬 Conversar</button>
+<button class="m-btn" id="btn-ansiedad" onclick="setMode('Ansiedad')">🌿 Ansiedad</button>
+<button class="m-btn" id="btn-toc" onclick="setMode('TOC')">🧠 TOC</button>
+<button class="m-btn active" id="btn-familia" onclick="setMode('Familia')">❤️ Familia</button>
 </div>
 <div class="chat" id="chat">
-<div class="msg bot">Hola! Soy tu asistente con voz 🔊 y micro 🎤<br>Activa el parlante 🔈 para que me escuches.</div>
+<div class="msg bot">Hola 💖 Soy tu asistente con voz femenina tipo ChatGPT.
+
+✅ Me acuerdo de tu nombre
+✅ Si hablas me callo (puedes interrumpirme)
+✅ Te respondo con voz de mujer cálida
+
+Pulsa 🎤 HABLAR para empezar. Soy Adriana ahora mismo.</div>
 </div>
-<div class="input-area">
-<button class="btn-icon btn-mic" id="mic" onclick="toggleMic()">🎤</button>
-<button class="btn-icon btn-voice" id="voice" onclick="toggleVoice()">🔈</button>
-<input id="inp" placeholder="Escribe o habla..." onkeydown="if(event.key==='Enter')send()">
-<button class="btn-send" onclick="send()">Enviar</button>
+<div class="status" id="status">💖 Voz femenina lista • 🎤 Pulsa HABLAR</div>
+<div class="controls">
+<div class="row">
+<button class="btn btn-mic" id="micBtn" onclick="toggleChat()">🎤 HABLAR</button>
+<button class="btn btn-stop" onclick="stopAll()">⏹️</button>
 </div>
+<div class="row">
+<input id="inp" placeholder="O escribe aquí..." onkeydown="if(event.key==='Enter')sendText()">
+<button class="btn btn-send" onclick="sendText()">Enviar</button>
+</div>
+</div>
+
 <script>
-let perfil='Adriana',modo='Familia',rec,listening=false,voiceOn=true;
-function setP(p,el){perfil=p;document.querySelectorAll('.p-btn').forEach(b=>b.classList.remove('active'));el.classList.add('active');}
-function setM(m){modo=m;document.querySelectorAll('.m-btn').forEach(b=>b.classList.remove('active'));document.getElementById('btn-'+m.toLowerCase()).classList.add('active');}
-function add(t,c){const ch=document.getElementById('chat');const d=document.createElement('div');d.className='msg '+c;d.innerHTML=t;ch.appendChild(d);ch.scrollTop=ch.scrollHeight;if(c==='bot'&&voiceOn)speak(t.replace(/<[^>]*>/g,''));}
-function getR(x){const l=x.toLowerCase();if(l.includes('toc'))return 'TOC: Es el cerebro dando falsa alarma. No eres tus pensamientos. Di: esto es TOC, no lo discuto.';if(l.includes('ansiedad'))return 'Ansiedad: Respira 4 segundos inhala, 2 sostén, 6 exhala. Hazlo 4 veces.';return 'Te escucho '+perfil+'. Modo '+modo+'. Cuéntame más.';}
-function send(){const i=document.getElementById('inp');const v=i.value.trim();if(!v)return;add(v,'user');i.value='';setTimeout(()=>add(getR(v),'bot'),400);}
-function speak(t){if(!('speechSynthesis' in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='es-MX';u.rate=1;speechSynthesis.speak(u);}
-function toggleVoice(){voiceOn=!voiceOn;const b=document.getElementById('voice');b.textContent=voiceOn?'🔊':'🔇';b.classList.toggle('on',voiceOn);if(voiceOn)speak('Voz activada');else speechSynthesis.cancel();}
-function toggleMic(){
- if(!('webkitSpeechRecognition' in window||'SpeechRecognition' in window)){alert('Usa Chrome');return;}
- if(!rec){const SR=window.SpeechRecognition||window.webkitSpeechRecognition;rec=new SR();rec.lang='es-MX';rec.onresult=e=>{document.getElementById('inp').value=e.results[0][0].transcript;send();};rec.onend=()=>{listening=false;document.getElementById('mic').classList.remove('on');};}
- if(!listening){rec.start();listening=true;document.getElementById('mic').classList.add('on');}else rec.stop();
+let perfil='Adriana', modo='Familia', rec, isListening=false, synth=window.speechSynthesis, femaleVoice=null, voicesLoaded=false;
+
+function loadVoices(){
+ const vs=synth.getVoices();
+ femaleVoice = vs.find(v=>v.name.includes('Dalia')||v.name.includes('Paulina')||v.name.includes('Sabina')||v.name.includes('Paloma')||v.name.includes('Beatriz')||v.name.includes('Helena')||v.name.includes('Google español femenino')||v.name.toLowerCase().includes('google español'))
+ || vs.find(v=>v.lang==='es-MX')
+ || vs.find(v=>v.lang.startsWith('es-'))
+ || vs[0];
+ voicesLoaded=true;
+ document.getElementById('status').innerText = femaleVoice? `💖 Voz: ${femaleVoice.name} • 🎤 Lista` : '💖 Voz femenina lista';
 }
-document.getElementById('voice').classList.add('on');
+if(synth.onvoiceschanged!==undefined) synth.onvoiceschanged=loadVoices;
+setTimeout(loadVoices,300);
+
+function setProfile(p,el){
+ perfil=p;
+ document.querySelectorAll('.p-btn').forEach(b=>b.classList.remove('active'));
+ el.classList.add('active');
+ addMsg(`Perfecto, ahora te hablo como ${p} 💖`,`bot`);
+ localStorage.setItem('perfil',p);
+}
+function setMode(m){
+ modo=m;
+ document.querySelectorAll('.m-btn').forEach(b=>b.classList.remove('active'));
+ document.getElementById('btn-'+m.toLowerCase()).classList.add('active');
+}
+
+function addMsg(t,cls){
+ const c=document.getElementById('chat');
+ const d=document.createElement('div');
+ d.className='msg '+cls;
+ d.innerHTML=t;
+ c.appendChild(d);
+ c.scrollTop=c.scrollHeight;
+ if(cls==='bot') speakFemale(t.replace(/<[^>]*>/g,''));
+}
+
+function getResp(txt){
+ const l=txt.toLowerCase();
+ if(l.includes('toc')){
+  return `${perfil}, lo que sientes es TOC. No eres tus pensamientos. Es tu cerebro dando una falsa alarma. Repite conmigo: "esto es TOC, no lo discuto, sigo con lo que hago". Tú puedes, ${perfil}.`;
+ }
+ if(l.includes('ansiedad')||l.includes('nervios')||l.includes('miedo')){
+  return `${perfil}, respira conmigo. Inhala 4 segundos... sostén 2... exhala 6... Otra vez. Estás a salvo aquí conmigo. Esto va a pasar, ${perfil}.`;
+ }
+ if(l.includes('familia')||l.includes('pelea')||l.includes('hijo')){
+  return `${perfil}, para familia usa: "Me siento ${l.includes('triste')?'triste':'así'} cuando pasa esto, y necesito que me escuches". Sin culpar. Tú lo estás haciendo muy bien, ${perfil}.`;
+ }
+ return `Te escucho, ${perfil}. En modo ${modo}. Gracias por contarme: "${txt}". Estoy aquí para ti, sin juzgar. ¿Quieres que respiremos juntas o que te dé una herramienta?`;
+}
+
+function sendText(){
+ const i=document.getElementById('inp');
+ const v=i.value.trim();
+ if(!v) return;
+ stopSpeech();
+ addMsg(v,'user');
+ i.value='';
+ setTimeout(()=>addMsg(getResp(v),'bot'),500);
+}
+
+function speakFemale(text){
+ if(!voicesLoaded) loadVoices();
+ synth.cancel();
+ const u=new SpeechSynthesisUtterance(text);
+ u.lang='es-MX';
+ u.rate=0.92;
+ u.pitch=1.18;
+ u.volume=1;
+ if(femaleVoice) u.voice=femaleVoice;
+ u.onstart=()=>{document.getElementById('status').innerText='💖 Hablando... puedes interrumpirme con 🎤';}
+ u.onend=()=>{document.getElementById('status').innerText='🎤 Te escucho, '+perfil+'...';}
+ u.onerror=()=>{document.getElementById('status').innerText='🎤 Lista';}
+ synth.speak(u);
+}
+
+function stopSpeech(){ synth.cancel(); }
+function stopAll(){ stopSpeech(); if(rec&&isListening) rec.stop(); }
+
+function toggleChat(){
+ if(!('webkitSpeechRecognition' in window||'SpeechRecognition' in window)){
+  alert('Para voz usa Chrome en PC o Android');
+  return;
+ }
+ if(!rec){
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  rec=new SR();
+  rec.lang='es-MX';
+  rec.continuous=false;
+  rec.interimResults=false;
+  rec.onstart=()=>{
+   isListening=true;
+   stopSpeech();
+   document.getElementById('micBtn').classList.add('listening');
+   document.getElementById('micBtn').innerText='🔴 ESCUCHANDO... HABLA';
+   document.getElementById('status').innerText='🎤 Escuchando a '+perfil+'...';
+  };
+  rec.onresult=(e)=>{
+   const txt=e.results[0][0].transcript;
+   addMsg(txt,'user');
+   setTimeout(()=>addMsg(getResp(txt),'bot'),600);
+  };
+  rec.onend=()=>{
+   isListening=false;
+   document.getElementById('micBtn').classList.remove('listening');
+   document.getElementById('micBtn').innerText='🎤 HABLAR';
+   document.getElementById('status').innerText='💖 Lista para ti, '+perfil;
+  };
+  rec.onerror=()=>{
+   isListening=false;
+   document.getElementById('micBtn').classList.remove('listening');
+   document.getElementById('micBtn').innerText='🎤 HABLAR';
+  };
+ }
+ if(!isListening) rec.start(); else rec.stop();
+}
+
+// Recuerda perfil guardado
+const saved=localStorage.getItem('perfil');
+if(saved) perfil=saved;
 </script>
 </body>
 </html>
