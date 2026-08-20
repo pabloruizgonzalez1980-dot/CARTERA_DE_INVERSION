@@ -3,190 +3,176 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Asistente Voz Femenina ChatGPT</title>
+<title>Asistente Voz Femenina - Adriana</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
 body{background:#0f172a;color:#e2e8f0;min-height:100vh;display:flex;flex-direction:column}
-.header{padding:12px;text-align:center;background:#1e293b;border-bottom:1px solid #334155}
-.p-btn{padding:7px 13px;border-radius:20px;border:1px solid #334155;background:#1e293b;color:#94a3b8;cursor:pointer;margin:3px;font-size:12px}
+.header{padding:12px;text-align:center;background:#1e293b;border-bottom:1px solid #334155;position:sticky;top:0;z-index:20}
+.p-btn{padding:6px 14px;border-radius:20px;border:1px solid #334155;background:#0f172a;color:#94a3b8;cursor:pointer;margin:3px;font-size:12px}
 .p-btn.active{background:#ec4899;color:#fff;border-color:#ec4899}
-.modes{padding:8px;background:#1e293b;display:grid;grid-template-columns:1fr 1fr;gap:6px}
-.m-btn{padding:11px;border-radius:10px;border:1px solid #334155;background:#0f172a;color:#cbd5e1;cursor:pointer;font-size:12px;font-weight:700}
-.m-btn.active{background:#f472b6;color:#0f172a}
-.chat{flex:1;padding:12px;display:flex;flex-direction:column;gap:10px;overflow-y:auto;scroll-behavior:smooth}
-.msg{padding:12px 14px;border-radius:18px;max-width:90%;font-size:14px;line-height:1.5;white-space:pre-wrap}
+.modes{padding:8px;background:#1e293b;display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;position:sticky;top:58px;z-index:19}
+.m-btn{padding:11px 5px;border-radius:10px;border:1px solid #334155;background:#0f172a;color:#cbd5e1;cursor:pointer;font-size:11px;font-weight:800;text-align:center}
+.m-btn.active{background:#f472b6;color:#0f172a;transform:scale(1.02)}
+.chat{flex:1;padding:12px;display:flex;flex-direction:column;gap:10px;overflow-y:auto}
+.msg{padding:13px 15px;border-radius:18px;max-width:92%;font-size:14px;line-height:1.5;white-space:pre-wrap}
 .bot{background:#1e293b;align-self:flex-start;border:1px solid #334155}
 .user{background:#ec4899;align-self:flex-end;color:#fff}
+.card{background:#1e293b;border:1px solid #334155;border-radius:14px;padding:12px;margin-top:6px}
+.card h4{font-size:13px;margin-bottom:8px;color:#f9a8d4}
+.routine-btn{width:100%;padding:12px;border-radius:10px;border:1px solid #334155;background:#0f172a;color:#fff;cursor:pointer;margin:5px 0;text-align:left;font-size:13px}
+.routine-btn:hover{border-color:#ec4899}
+.breathe-circle{width:90px;height:90px;border-radius:50%;background:#ec4899;margin:12px auto;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;transition:transform 4s ease-in-out}
 .status{text-align:center;font-size:11px;color:#f9a8d4;padding:6px;background:#1e293b;border-top:1px solid #334155}
-.controls{padding:12px;background:#1e293b;display:flex;flex-direction:column;gap:8px;border-top:1px solid #334155}
+.controls{padding:12px;background:#1e293b;display:flex;flex-direction:column;gap:8px;border-top:1px solid #334155;position:sticky;bottom:0}
 .row{display:flex;gap:8px}
 .row input{flex:1;padding:14px;border-radius:12px;border:1px solid #334155;background:#0f172a;color:#fff;outline:none;font-size:14px}
 .btn{border:none;border-radius:12px;padding:14px;cursor:pointer;font-weight:800}
 .btn-mic{flex:1;background:#ec4899;color:#fff;font-size:16px}
 .btn-mic.listening{background:#ef4444;animation:pulse 1s infinite}
-.btn-stop{background:#334155;color:#fff;padding:14px 16px}
-.btn-send{background:#0ea5e9;color:#fff;padding:14px 18px}
+.btn-stop{background:#334155;color:#fff}
+.btn-send{background:#0ea5e9;color:#fff}
 @keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.02)}100%{transform:scale(1)}}
+.small{font-size:11px;color:#94a3b8;margin-top:6px;text-align:center}
 </style>
 </head>
 <body>
 <div class="header">
-<h3>💖 Asistente - Voz Femenina</h3>
+<h3>💖 Adriana - Voz Femenina</h3>
 <div style="margin-top:8px">
 <button class="p-btn active" onclick="setProfile('Adriana',this)">Adriana</button>
 <button class="p-btn" onclick="setProfile('Adrián',this)">Adrián</button>
-<button class="p-btn" onclick="setProfile('Familia',this)">Familia</button>
 <button class="p-btn" onclick="setProfile('Pablo',this)">Pablo</button>
+<button class="p-btn" onclick="setProfile('Familia',this)">Familia</button>
 </div>
 </div>
+
 <div class="modes">
-<button class="m-btn" id="btn-conversar" onclick="setMode('Conversar')">💬 Conversar</button>
-<button class="m-btn" id="btn-ansiedad" onclick="setMode('Ansiedad')">🌿 Ansiedad</button>
-<button class="m-btn" id="btn-toc" onclick="setMode('TOC')">🧠 TOC</button>
-<button class="m-btn active" id="btn-familia" onclick="setMode('Familia')">❤️ Familia</button>
+<button class="m-btn active" id="btn-ansiedad" onclick="setMode('Ansiedad')">🌿<br>Ansiedad</button>
+<button class="m-btn" id="btn-panico" onclick="setMode('Panico')">🚨<br>Pánico</button>
+<button class="m-btn" id="btn-toc" onclick="setMode('TOC')">🧠<br>TOC</button>
+<button class="m-btn" id="btn-familia" onclick="setMode('Familia')">❤️<br>Familia</button>
+<button class="m-btn" id="btn-conversar" onclick="setMode('Conversar')">💬<br>Dudas</button>
+<button class="m-btn" id="btn-respirar" onclick="setMode('Respirar')">🌬️<br>Calma</button>
 </div>
+
 <div class="chat" id="chat">
-<div class="msg bot">Hola 💖 Soy tu asistente con voz femenina tipo ChatGPT.
+<div class="msg bot">Hola 💖 Soy Adriana, tu asistente de voz femenina.
 
-✅ Me acuerdo de tu nombre
-✅ Si hablas me callo (puedes interrumpirme)
-✅ Te respondo con voz de mujer cálida
+Estoy aquí para acompañarte sin juzgar. No sustituyo terapia profesional, pero te guío con herramientas validadas.
 
-Pulsa 🎤 HABLAR para empezar. Soy Adriana ahora mismo.</div>
+Elige arriba un módulo:
+🌿 Ansiedad: Detectar disparadores
+🚨 Pánico: Rutina 5-4-3-2-1 + respiración
+🧠 TOC: Diferenciar pensamiento de realidad
+❤️ Familia: Comunicación no violenta
+💬 Dudas: Pregúntame lo que quieras por voz o texto.
+
+Pulsa 🎤 HABLAR y dime, ¿cómo te sientes hoy, <span id="nameSpan">Adriana</span>?
+<p class="small">Si tienes crisis intensa, contacta a tu red de apoyo o servicio de emergencia local. Estoy contigo.</p>
 </div>
-<div class="status" id="status">💖 Voz femenina lista • 🎤 Pulsa HABLAR</div>
+</div>
+
+<div class="status" id="status">💖 Voz lista • Pulsa 🎤 para hablar</div>
+
 <div class="controls">
 <div class="row">
 <button class="btn btn-mic" id="micBtn" onclick="toggleChat()">🎤 HABLAR</button>
 <button class="btn btn-stop" onclick="stopAll()">⏹️</button>
 </div>
 <div class="row">
-<input id="inp" placeholder="O escribe aquí..." onkeydown="if(event.key==='Enter')sendText()">
+<input id="inp" placeholder="Escribe: me siento ansioso, tengo un pensamiento..." onkeydown="if(event.key==='Enter')sendText()">
 <button class="btn btn-send" onclick="sendText()">Enviar</button>
 </div>
 </div>
 
 <script>
-let perfil='Adriana', modo='Familia', rec, isListening=false, synth=window.speechSynthesis, femaleVoice=null, voicesLoaded=false;
+let perfil=localStorage.getItem('perfil')||'Adriana', modo='Ansiedad', rec, isListening=false, synth=window.speechSynthesis, femaleVoice=null, panicStep=0;
 
 function loadVoices(){
  const vs=synth.getVoices();
- femaleVoice = vs.find(v=>v.name.includes('Dalia')||v.name.includes('Paulina')||v.name.includes('Sabina')||v.name.includes('Paloma')||v.name.includes('Beatriz')||v.name.includes('Helena')||v.name.includes('Google español femenino')||v.name.toLowerCase().includes('google español'))
- || vs.find(v=>v.lang==='es-MX')
- || vs.find(v=>v.lang.startsWith('es-'))
- || vs[0];
- voicesLoaded=true;
- document.getElementById('status').innerText = femaleVoice? `💖 Voz: ${femaleVoice.name} • 🎤 Lista` : '💖 Voz femenina lista';
+ femaleVoice = vs.find(v=>v.name.includes('Dalia')||v.name.includes('Paulina')||v.name.includes('Sabina')||v.name.includes('Paloma')) || vs.find(v=>v.lang==='es-MX') || vs.find(v=>v.lang.startsWith('es-')) || vs[0];
+ document.getElementById('status').innerText = femaleVoice? `💖 Voz: ${femaleVoice.name} • Modo ${modo}` : `💖 Modo ${modo} listo`;
 }
 if(synth.onvoiceschanged!==undefined) synth.onvoiceschanged=loadVoices;
-setTimeout(loadVoices,300);
+setTimeout(loadVoices,400);
 
 function setProfile(p,el){
- perfil=p;
- document.querySelectorAll('.p-btn').forEach(b=>b.classList.remove('active'));
- el.classList.add('active');
- addMsg(`Perfecto, ahora te hablo como ${p} 💖`,`bot`);
- localStorage.setItem('perfil',p);
+ perfil=p; localStorage.setItem('perfil',p);
+ document.querySelectorAll('.p-btn').forEach(b=>b.classList.remove('active')); el.classList.add('active');
+ document.getElementById('nameSpan').innerText=p;
+ addMsg(`Perfecto ${p} 💖 Ahora todo será personalizado para ti. Estoy en modo ${modo}. ¿Qué sientes hoy?`,'bot');
 }
 function setMode(m){
  modo=m;
  document.querySelectorAll('.m-btn').forEach(b=>b.classList.remove('active'));
  document.getElementById('btn-'+m.toLowerCase()).classList.add('active');
+ renderModeIntro(m);
+}
+
+function renderModeIntro(m){
+ let html='';
+ if(m==='Ansiedad'){
+  html=`${perfil}, vamos a identificar tu patrón de ansiedad juntas 💖<br><br>
+  <div class="card"><h4>🌿 Rutina Ansiedad (3 pasos)</h4>
+  <button class="routine-btn" onclick="startAnx(1)">1️⃣ Identificar disparador: ¿Qué pasó antes?</button>
+  <button class="routine-btn" onclick="startAnx(2)">2️⃣ Registro cuerpo-mente: escala 0-10</button>
+  <button class="routine-btn" onclick="startAnx(3)">3️⃣ Respiración 4-2-6 + anclaje</button>
+  <div id="breatheArea"></div>
+  <p class="small">Audio-visual: círculo que se expande = inhala, se contrae = exhala. Sin enlaces externos.</p>
+  </div>`;
+ }
+ if(m==='Panico'){
+  html=`${perfil}, si sientes pánico ahora, estás a salvo. No es peligroso, es una ola que sube y baja. Yo te guío 💖<br><br>
+  <div class="card"><h4>🚨 Protocolo Pánico (validado)</h4>
+  <button class="routine-btn" onclick="startPanico(1)">1️⃣ Tierra: técnica 5-4-3-2-1 (ver, tocar, oír)</button>
+  <button class="routine-btn" onclick="startPanico(2)">2️⃣ Respiración diafragmática lenta</button>
+  <button class="routine-btn" onclick="startPanico(3)">3️⃣ Auto-charla compasiva + plan post-crisis</button>
+  <div id="breatheArea"></div>
+  </div>`;
+ }
+ if(m==='TOC'){
+  html=`${perfil}, lo que piensas no te define. En TOC el cerebro da falsa alarma. Vamos a entrenar no discutir con el pensamiento 🧠💖<br><br>
+  <div class="card"><h4>🧠 Rutina TOC</h4>
+  <button class="routine-btn" onclick="startTOC(1)">1️⃣ Etiquetar: "Esto es TOC, no un hecho"</button>
+  <button class="routine-btn" onclick="startTOC(2)">2️⃣ Posponer ritual 10 min + actividad valiosa</button>
+  <button class="routine-btn" onclick="startTOC(3)">3️⃣ Registro de aprendizaje: ¿qué pasó si no hiciste ritual?</button>
+  </div>`;
+ }
+ if(m==='Familia') html=`${perfil}, para familia usa fórmula CNV: "Me siento [emoción] cuando [hecho concreto] y necesito [petición clara]". Sin culpar. ¿Quieres practicarlo conmigo por voz? 💖`;
+ if(m==='Conversar') html=`${perfil}, este es tu espacio libre de dudas 💖 Pregúntame por voz o texto: "¿por qué me da ansiedad en las mañanas?" "¿cómo le explico a mi familia?" Te respondo con info psicoeducativa cálida y te doy una recomendación práctica paso a paso.`;
+ if(m==='Respirar') html=`Vamos a respirar juntas ${perfil} 🌬️<br><div class="card"><div class="breathe-circle" id="circle">Inhala</div><button class="routine-btn" onclick="doBreathing()">▶️ Iniciar ciclo 4-2-6 (1 minuto)</button></div>`;
+ addMsg(html,'bot');
+}
+
+function startAnx(s){
+ if(s===1) addMsg(`${perfil}, dime por voz o texto: ¿Dónde estabas? ¿Qué pensaste justo antes de sentir ansiedad? ¿Qué sentiste en cuerpo? Ej: "estaba en trabajo, pensé que me van a regañar, sentí pecho apretado". Así detectamos tu patrón disparador 💖`,'bot');
+ if(s===2) addMsg(`${perfil}, del 0 al 10 ¿cuán intensa está tu ansiedad ahora? ¿Y qué sientes en cuerpo? Pecho, estómago, manos? Anótalo conmigo: "Ansiedad 7, pecho apretado". Ver tu número ayuda a ver que baja 💖`,'bot');
+ if(s===3){ addMsg(`${perfil}, respira conmigo 4-2-6. Inhala 4, sostén 2, exhala 6. Mira el círculo 💖`,'bot'); setTimeout(()=>doBreathing(),600); }
+}
+function startPanico(s){
+ if(s===1) addMsg(`${perfil}, técnica 5-4-3-2-1 para volver a tierra, hazlo conmigo en voz alta:\n5 cosas que VES\n4 cosas que TOCAS\n3 cosas que OYES\n2 cosas que HUELES\n1 cosa que SABOREAS\nDime 2 de cada una por voz o texto, yo te espero aquí, no hay prisa 💖`,'bot');
+ if(s===2){ addMsg(`${perfil}, pon una mano en pecho, otra en panza. Solo mueve panza. Inhala lento 4 seg, exhala 6. Yo cuento contigo.`,'bot'); doBreathing(); }
+ if(s===3) addMsg(`${perfil}, di conmigo: "Esto es pánico, es incómodo pero no peligroso, ya pasó antes y va a pasar. Estoy a salvo". Ahora plan post-crisis: agua, caminar lento, avisar a alguien de confianza, anotar qué ayudó. Lo estás haciendo muy bien 💖`,'bot');
+}
+function startTOC(s){
+ if(s===1) addMsg(`${perfil}, cuando venga el pensamiento, etiquétalo sin discutir: "Ah, está mi TOC con pensamiento de [contaminación/daño]. Es solo un pensamiento, no un deseo ni un hecho". Repetimos sin pelear. ¿Quieres probarlo ahora diciendo el pensamiento? 💖`,'bot');
+ if(s===2) addMsg(`${perfil}, técnica de posponer: "Gracias cerebro, lo atiendo en 10 min, ahora sigo doblando ropa / trabajando". Pon timer de 10 min y haz algo valioso para ti. La ansiedad baja sola. ¿Qué actividad valiosa eliges ahora?`,'bot');
+ if(s===3) addMsg(`${perfil}, después de no hacer el ritual, anota: ¿qué temías que pasaría? ¿qué pasó realmente? Así tu cerebro aprende que la alarma era falsa. Cada registro es un triunfo, ${perfil} 💖`,'bot');
 }
 
 function addMsg(t,cls){
- const c=document.getElementById('chat');
- const d=document.createElement('div');
- d.className='msg '+cls;
- d.innerHTML=t;
- c.appendChild(d);
- c.scrollTop=c.scrollHeight;
- if(cls==='bot') speakFemale(t.replace(/<[^>]*>/g,''));
+ const c=document.getElementById('chat'); const d=document.createElement('div'); d.className='msg '+cls; d.innerHTML=t; c.appendChild(d); c.scrollTop=c.scrollHeight;
+ if(cls==='bot') speakFemale(d.innerText.replace(/[\u{1F300}-\u{1F9FF}]/g,'').slice(0,400));
 }
-
 function getResp(txt){
  const l=txt.toLowerCase();
- if(l.includes('toc')){
-  return `${perfil}, lo que sientes es TOC. No eres tus pensamientos. Es tu cerebro dando una falsa alarma. Repite conmigo: "esto es TOC, no lo discuto, sigo con lo que hago". Tú puedes, ${perfil}.`;
- }
- if(l.includes('ansiedad')||l.includes('nervios')||l.includes('miedo')){
-  return `${perfil}, respira conmigo. Inhala 4 segundos... sostén 2... exhala 6... Otra vez. Estás a salvo aquí conmigo. Esto va a pasar, ${perfil}.`;
- }
- if(l.includes('familia')||l.includes('pelea')||l.includes('hijo')){
-  return `${perfil}, para familia usa: "Me siento ${l.includes('triste')?'triste':'así'} cuando pasa esto, y necesito que me escuches". Sin culpar. Tú lo estás haciendo muy bien, ${perfil}.`;
- }
- return `Te escucho, ${perfil}. En modo ${modo}. Gracias por contarme: "${txt}". Estoy aquí para ti, sin juzgar. ¿Quieres que respiremos juntas o que te dé una herramienta?`;
-}
-
-function sendText(){
- const i=document.getElementById('inp');
- const v=i.value.trim();
- if(!v) return;
- stopSpeech();
- addMsg(v,'user');
- i.value='';
- setTimeout(()=>addMsg(getResp(v),'bot'),500);
-}
-
-function speakFemale(text){
- if(!voicesLoaded) loadVoices();
- synth.cancel();
- const u=new SpeechSynthesisUtterance(text);
- u.lang='es-MX';
- u.rate=0.92;
- u.pitch=1.18;
- u.volume=1;
- if(femaleVoice) u.voice=femaleVoice;
- u.onstart=()=>{document.getElementById('status').innerText='💖 Hablando... puedes interrumpirme con 🎤';}
- u.onend=()=>{document.getElementById('status').innerText='🎤 Te escucho, '+perfil+'...';}
- u.onerror=()=>{document.getElementById('status').innerText='🎤 Lista';}
- synth.speak(u);
-}
-
-function stopSpeech(){ synth.cancel(); }
-function stopAll(){ stopSpeech(); if(rec&&isListening) rec.stop(); }
-
-function toggleChat(){
- if(!('webkitSpeechRecognition' in window||'SpeechRecognition' in window)){
-  alert('Para voz usa Chrome en PC o Android');
-  return;
- }
- if(!rec){
-  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-  rec=new SR();
-  rec.lang='es-MX';
-  rec.continuous=false;
-  rec.interimResults=false;
-  rec.onstart=()=>{
-   isListening=true;
-   stopSpeech();
-   document.getElementById('micBtn').classList.add('listening');
-   document.getElementById('micBtn').innerText='🔴 ESCUCHANDO... HABLA';
-   document.getElementById('status').innerText='🎤 Escuchando a '+perfil+'...';
-  };
-  rec.onresult=(e)=>{
-   const txt=e.results[0][0].transcript;
-   addMsg(txt,'user');
-   setTimeout(()=>addMsg(getResp(txt),'bot'),600);
-  };
-  rec.onend=()=>{
-   isListening=false;
-   document.getElementById('micBtn').classList.remove('listening');
-   document.getElementById('micBtn').innerText='🎤 HABLAR';
-   document.getElementById('status').innerText='💖 Lista para ti, '+perfil;
-  };
-  rec.onerror=()=>{
-   isListening=false;
-   document.getElementById('micBtn').classList.remove('listening');
-   document.getElementById('micBtn').innerText='🎤 HABLAR';
-  };
- }
- if(!isListening) rec.start(); else rec.stop();
-}
-
-// Recuerda perfil guardado
-const saved=localStorage.getItem('perfil');
-if(saved) perfil=saved;
-</script>
-</body>
-</html>
+ // DETECTOR DE PATRONES
+ let patron='';
+ if(l.includes('trabajo')||l.includes('jefe')) patron='parece que trabajo es disparador frecuente.';
+ if(l.includes('noche')||l.includes('dormir')) patron='parece que en noches sube.';
+ if(l.includes('familia')||l.includes('pareja')) patron='noto que temas de familia activan.';
+ if(l.includes('no puedo respirar')||l.includes('me muero')||l.includes('corazon')){ setMode('Panico'); return `${perfil}, eso que sientes es pánico, estás a salvo. No estás en peligro. Vamos a anclarnos: 5 cosas que ves ahora, dime 2. Respira conmigo 4-2-6. Si puedes, siéntate y pon pies en tierra. Estoy contigo ${perfil}.`; }
+ if(l.includes('pensamiento')&& (l.includes('no se va')||l.includes('malo'))) { setMode('TOC'); return `${perfil}, eso es tu TOC presentando un pensamiento intrusivo. No eres tu pensamiento. Etiquétalo: "es TOC". No lo discutas, no busques certeza 100%. Sigue con lo que hacías. Tú puedes ${perfil}.`; }
+ if(l.includes('ansiedad')||l.includes('nervios')){ return `${perfil}, gracias por decirlo. ${patron} Vamos a hacer registro rápido: del 0 al 10 ¿cuánto sientes? ¿Dónde en cuerpo? Y ¿qué pensaste antes? Con eso vemos tu patrón y te guío a respiración 4-2-6 💖`; }
+ if(l.includes('familia')||l.includes('pelea')) return `${perfil}, usa: "Me siento ansiosa cuando... y necesito que me escuches sin consejo". ¿Quieres que practiquemos tu frase ahora por voz?`;
+ // M
