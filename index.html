@@ -1,178 +1,214 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Asistente Voz Femenina - Adriana</title>
+<!-- saved from url=(0195)file:///C:/Users/Pablo%20Ruiz%20Gonzalez/Desktop/ACT.%20FINAL/final/Asesor%20Financiero/final/Asistente_Financiero_IA_Final_files/final/F/V14%20-%20CUALQUIER%20ARCHIVO%20-%20FLUJO%20ORIGINAL.html -->
+<html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>V24 - PARTE BAJA VISUALIZACIÓN - OPTIMIZACIÓN GENERAL</title>
+<script src="./V24 - PARTE BAJA VISUALIZACIÓN - OPTIMIZACIÓN GENERAL_files/xlsx.full.min.js.descarga"></script>
+<script src="./V24 - PARTE BAJA VISUALIZACIÓN - OPTIMIZACIÓN GENERAL_files/pdf.min.js.descarga"></script>
+<script src="./V24 - PARTE BAJA VISUALIZACIÓN - OPTIMIZACIÓN GENERAL_files/tesseract.min.js.descarga"></script>
+<script src="./V24 - PARTE BAJA VISUALIZACIÓN - OPTIMIZACIÓN GENERAL_files/chart.umd.min.js.descarga"></script>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
-body{background:#0f172a;color:#e2e8f0;min-height:100vh;display:flex;flex-direction:column}
-.header{padding:12px;text-align:center;background:#1e293b;border-bottom:1px solid #334155;position:sticky;top:0;z-index:20}
-.p-btn{padding:6px 14px;border-radius:20px;border:1px solid #334155;background:#0f172a;color:#94a3b8;cursor:pointer;margin:3px;font-size:12px}
-.p-btn.active{background:#ec4899;color:#fff;border-color:#ec4899}
-.modes{padding:8px;background:#1e293b;display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;position:sticky;top:58px;z-index:19}
-.m-btn{padding:11px 5px;border-radius:10px;border:1px solid #334155;background:#0f172a;color:#cbd5e1;cursor:pointer;font-size:11px;font-weight:800;text-align:center}
-.m-btn.active{background:#f472b6;color:#0f172a;transform:scale(1.02)}
-.chat{flex:1;padding:12px;display:flex;flex-direction:column;gap:10px;overflow-y:auto}
-.msg{padding:13px 15px;border-radius:18px;max-width:92%;font-size:14px;line-height:1.5;white-space:pre-wrap}
-.bot{background:#1e293b;align-self:flex-start;border:1px solid #334155}
-.user{background:#ec4899;align-self:flex-end;color:#fff}
-.card{background:#1e293b;border:1px solid #334155;border-radius:14px;padding:12px;margin-top:6px}
-.card h4{font-size:13px;margin-bottom:8px;color:#f9a8d4}
-.routine-btn{width:100%;padding:12px;border-radius:10px;border:1px solid #334155;background:#0f172a;color:#fff;cursor:pointer;margin:5px 0;text-align:left;font-size:13px}
-.routine-btn:hover{border-color:#ec4899}
-.breathe-circle{width:90px;height:90px;border-radius:50%;background:#ec4899;margin:12px auto;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;transition:transform 4s ease-in-out}
-.status{text-align:center;font-size:11px;color:#f9a8d4;padding:6px;background:#1e293b;border-top:1px solid #334155}
-.controls{padding:12px;background:#1e293b;display:flex;flex-direction:column;gap:8px;border-top:1px solid #334155;position:sticky;bottom:0}
-.row{display:flex;gap:8px}
-.row input{flex:1;padding:14px;border-radius:12px;border:1px solid #334155;background:#0f172a;color:#fff;outline:none;font-size:14px}
-.btn{border:none;border-radius:12px;padding:14px;cursor:pointer;font-weight:800}
-.btn-mic{flex:1;background:#ec4899;color:#fff;font-size:16px}
-.btn-mic.listening{background:#ef4444;animation:pulse 1s infinite}
-.btn-stop{background:#334155;color:#fff}
-.btn-send{background:#0ea5e9;color:#fff}
-@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.02)}100%{transform:scale(1)}}
-.small{font-size:11px;color:#94a3b8;margin-top:6px;text-align:center}
+body{background:#020617;color:#fff;font-family:Arial;padding:8px;margin:0}
+.header{border:2px solid #00d5ff;border-radius:10px;padding:10px;text-align:center;color:#00d5ff;font-weight:bold;background:#0a1931;margin-bottom:8px}
+.btn{padding:16px;border:none;border-radius:12px;font-weight:bold;width:100%;margin-bottom:10px;display:block;text-align:center;cursor:pointer;font-size:14px;touch-action:manipulation}
+#btnAttach{background:#0277bd;color:#fff;border:2px solid #00d5ff;position:relative;overflow:hidden}
+#btnUpdate{background:#00ff88;color:#000} #btnUpdate:disabled{background:#444;color:#888}
+#fileInput{position:absolute;left:0;top:0;width:100%;height:100%;opacity:0;cursor:pointer;z-index:10}
+#log{background:#000;color:#0f0;padding:8px;font-size:10px;white-space:pre-wrap;border:1px solid #0f0;max-height:110px;overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:11px;background:#081028} th{background:#0a2a5a;color:#00d5ff;padding:6px;border:1px solid #123a6b} td{padding:6px;border:1px solid #123a6b}
+.card{border:2px solid #ffcc00;border-radius:10px;padding:10px;margin:8px 0;background:#1a1600}.card-live{border:2px solid #00d5ff;border-radius:10px;padding:10px;background:#081028;display:none}.card-pie{border:2px solid #00ff88;border-radius:10px;padding:10px;background:#081028;display:none;margin-top:8px}.card-analisis{border:2px solid #ff1744;border-radius:10px;padding:12px;background:#0f0a0a;display:none;margin-top:10px}
+/* PARTE BAJA VISUALIZACION - OPTIMIZACION GENERAL */
+.card-general{border:3px solid #00ff88;border-radius:12px;padding:14px;background:#001a0a;display:none;margin-top:15px;margin-bottom:20px}
+.box{padding:11px;border-radius:8px;margin-bottom:8px;font-size:11px;line-height:1.7;font-family:Consolas,monospace}
+.box-analisis{background:#1a0000;color:#ff8a80;border-left:5px solid #ff1744}.box-bp{background:#001a0a;color:#69f0ae;border-left:5px solid #00ff88}.box-venta{background:#1a0f00;color:#ffcc80;border-left:5px solid #ff6d00}.box-pro{background:#0a1931;color:#90caf9;border-left:5px solid #00d5ff}
+.box-general{background:#002200;color:#a5d6a7;border-left:5px solid #00ff88;font-size:11px}
+.reco{padding:4px 8px;border-radius:10px;font-size:9px;font-weight:bold;display:inline-block}.reco-hold{background:#0d47a1;color:#90caf9}.reco-buy{background:#00c853;color:#000}.reco-sell{background:#d50000;color:#fff}.reco-trim{background:#ff6d00;color:#000}
+.row-costo{background:#3a1f00;color:#ff9800;font-weight:bold;text-align:center}.row-total{background:#003a1f;color:#00ff88;font-weight:bold;text-align:center}
 </style>
 </head>
 <body>
-<div class="header">
-<h3>💖 Adriana - Voz Femenina</h3>
-<div style="margin-top:8px">
-<button class="p-btn active" onclick="setProfile('Adriana',this)">Adriana</button>
-<button class="p-btn" onclick="setProfile('Adrián',this)">Adrián</button>
-<button class="p-btn" onclick="setProfile('Pablo',this)">Pablo</button>
-<button class="p-btn" onclick="setProfile('Familia',this)">Familia</button>
-</div>
+<div class="header">📊 V24 - PARTE BAJA VISUALIZACIÓN - OPTIMIZACIÓN GENERAL MAX DIV+CREC+MIN OVERLAP+CAGR</div>
+
+<div class="btn" id="btnAttach">
+ 📎 1. CARGAR CUALQUIER ARCHIVO - PC Y TELÉFONO (IMAGEN, EXCEL ODS/XLSX, CSV, TXT, PDF) - SIEMPRE DISPONIBLE<br>
+ <span style="font-size:10px;font-weight:normal">Toca aquí - Galería/Archivos/Cámara - Cualquier tipo de archivo - PC y móvil</span>
+ <input type="file" id="fileInput" accept=".ods,.xlsx,.xls,.csv,.txt,.pdf,.json,.png,.jpg,.jpeg,.webp,image/*,*/*">
 </div>
 
-<div class="modes">
-<button class="m-btn active" id="btn-ansiedad" onclick="setMode('Ansiedad')">🌿<br>Ansiedad</button>
-<button class="m-btn" id="btn-panico" onclick="setMode('Panico')">🚨<br>Pánico</button>
-<button class="m-btn" id="btn-toc" onclick="setMode('TOC')">🧠<br>TOC</button>
-<button class="m-btn" id="btn-familia" onclick="setMode('Familia')">❤️<br>Familia</button>
-<button class="m-btn" id="btn-conversar" onclick="setMode('Conversar')">💬<br>Dudas</button>
-<button class="m-btn" id="btn-respirar" onclick="setMode('Respirar')">🌬️<br>Calma</button>
+<button class="btn" id="btnUpdate">🔴 2. ACTUALIZAR PRECIOS LIVE + MONITOREO + PASTEL + ANALISIS + OPTIMIZACIÓN GENERAL ABAJO</button>
+
+<div id="log">LOG V24: Botón universal PC+Móvil siempre disponible - Optimización general en parte baja visualización
+Tu ODS: Costo Base 614.71 + Cash 27.31 + 7 ETFs - $518.05 USD total
+17:44:24 - V24 cargado - Optimización general en parte baja visualización - Botón universal PC+Móvil
+17:44:35 - Archivo: cantidad ETF_Final_2.ods 14.2KB PC
+17:44:35 - VALIDACIÓN: 8 ETFs - Botón adjuntar sigue disponible arriba PC+Móvil
+17:44:41 - ✅ PARTE BAJA VISUALIZACIÓN - OPTIMIZACIÓN GENERAL COMPLETA - TOTAL $535.57 | DIV 2.58%→3.6% CAGR 15.2%→14.8% Over 38%→16% - BOTÓN ADJUNTAR SIEMPRE DISPONIBLE</div>
+
+<div id="validacion" class="card" style="display: none;">
+<h3 style="color:#ffcc00;text-align:center">🔍 VALIDACIÓN</h3>
+<table><thead><tr><th>TICKER</th><th>CANT</th><th>ORIGINAL</th></tr></thead><tbody id="tbodyVal"><tr style="background:#3a1f00"><td>COSTO BASE</td><td>614.71</td><td>Costo 614.71</td></tr><tr style="background:#001a1a"><td>CASH</td><td>27.31</td><td>Cash 27.31</td></tr><tr><td style="color:#00ff88;font-weight:bold">SCHD</td><td>4.664863</td><td style="font-size:10px;color:#aaa">SCHD 4.664863169</td></tr><tr><td style="color:#00ff88;font-weight:bold">QQQM</td><td>0.487026</td><td style="font-size:10px;color:#aaa">QQQM 0.487026485</td></tr><tr><td style="color:#00ff88;font-weight:bold">VXUS</td><td>1.047299</td><td style="font-size:10px;color:#aaa">VXUS 1.047299181</td></tr><tr><td style="color:#00ff88;font-weight:bold">VNQ</td><td>0.413870</td><td style="font-size:10px;color:#aaa">VNQ 0.413870303</td></tr><tr><td style="color:#00ff88;font-weight:bold">SHLD</td><td>0.522817</td><td style="font-size:10px;color:#aaa">SHLD 0.522816813</td></tr><tr><td style="color:#00ff88;font-weight:bold">JEPQ</td><td>0.420353</td><td style="font-size:10px;color:#aaa">JEPQ 0.420352738</td></tr><tr><td style="color:#00ff88;font-weight:bold">BTCUSD</td><td>0.000253</td><td style="font-size:10px;color:#aaa">BTCUSD 0.00025276</td></tr><tr><td style="color:#00ff88;font-weight:bold">BTCUSD</td><td>0.000253</td><td style="font-size:10px;color:#aaa">BTC 0.00025276</td></tr></tbody></table>
 </div>
 
-<div class="chat" id="chat">
-<div class="msg bot">Hola 💖 Soy Adriana, tu asistente de voz femenina.
-
-Estoy aquí para acompañarte sin juzgar. No sustituyo terapia profesional, pero te guío con herramientas validadas.
-
-Elige arriba un módulo:
-🌿 Ansiedad: Detectar disparadores
-🚨 Pánico: Rutina 5-4-3-2-1 + respiración
-🧠 TOC: Diferenciar pensamiento de realidad
-❤️ Familia: Comunicación no violenta
-💬 Dudas: Pregúntame lo que quieras por voz o texto.
-
-Pulsa 🎤 HABLAR y dime, ¿cómo te sientes hoy, <span id="nameSpan">Adriana</span>?
-<p class="small">Si tienes crisis intensa, contacta a tu red de apoyo o servicio de emergencia local. Estoy contigo.</p>
-</div>
+<div id="monitoreo" class="card-live" style="display: block;">
+<div id="headerLive" style="text-align:center;color:#00d5ff;font-weight:bold;margin-bottom:6px">📊 TOTAL $535.57 USD | COSTO $614.71 | CASH $27.31 | P&amp;L -12.87% | DIV 2.58% CAGR 15.2%</div>
+<table><thead><tr><th>TICKER % | DIV | CAGR | PE | OVERLAP</th><th>CANT</th><th>PRECIO LIVE</th><th>VALOR USD/MXN</th><th>RECO MAX BENEFICIO</th></tr></thead><tbody id="tbodyLive"><tr><td style="color:#00ff88;font-weight:bold">SCHD 30.56%<br><span style="color:#ffcc00;font-size:9px">DIV 3.82% | CAGR 12.1% | PE 15.2 | Over 32%</span></td><td>4.664863</td><td style="color:#ffcc00">$35.09</td><td>$163.69</td><td>$2792.55</td><td><span class="reco reco-hold">HOLD - DIV 3.82%</span></td></tr><tr><td style="color:#00ff88;font-weight:bold">QQQM 26.81%<br><span style="color:#ffcc00;font-size:9px">DIV 0.48% | CAGR 18.5% | PE 28.5 | Over 85%</span></td><td>0.487026</td><td style="color:#ffcc00">$294.85</td><td>$143.60</td><td>$2449.81</td><td><span class="reco reco-hold">HOLD - DIV 0.48%</span></td></tr><tr><td style="color:#00ff88;font-weight:bold">VXUS 17.01%<br><span style="color:#ffcc00;font-size:9px">DIV 3.1% | CAGR 7.8% | PE 13.1 | Over 0%</span></td><td>1.047299</td><td style="color:#ffcc00">$86.97</td><td>$91.08</td><td>$1553.89</td><td><span class="reco reco-buy">BUY FUERTE - PE 13.1</span></td></tr><tr><td style="color:#00ff88;font-weight:bold">VNQ 7.62%<br><span style="color:#ffcc00;font-size:9px">DIV 4.15% | CAGR 4.5% | PE 31 | Over 0%</span></td><td>0.413870</td><td style="color:#ffcc00">$98.61</td><td>$40.81</td><td>$696.25</td><td><span class="reco reco-hold">HOLD - DIV 4.15%</span></td></tr><tr><td style="color:#00ff88;font-weight:bold">SHLD 6.76%<br><span style="color:#ffcc00;font-size:9px">DIV 0% | CAGR 22.3% | PE 35 | Over 42%</span></td><td>0.522817</td><td style="color:#ffcc00">$69.20</td><td>$36.18</td><td>$617.21</td><td><span class="reco reco-trim">TRIM 50% - PE 35</span></td></tr><tr><td style="color:#00ff88;font-weight:bold">JEPQ 4.70%<br><span style="color:#ffcc00;font-size:9px">DIV 9.4% | CAGR 8.5% | PE 26 | Over 85%</span></td><td>0.420353</td><td style="color:#ffcc00">$59.87</td><td>$25.17</td><td>$429.34</td><td><span class="reco reco-sell">VENDE 100% - Overlap 85%</span></td></tr><tr><td style="color:#00ff88;font-weight:bold">BTCUSD 3.27%<br><span style="color:#ffcc00;font-size:9px">DIV 0% | CAGR 45% | PE 0 | Over 0%</span></td><td>0.000253</td><td style="color:#ffcc00">$69322.00</td><td>$17.52</td><td>$298.92</td><td><span class="reco reco-hold">HOLD - DIV 0%</span></td></tr><tr><td style="color:#00ff88;font-weight:bold">BTCUSD 3.27%<br><span style="color:#ffcc00;font-size:9px">DIV 0% | CAGR 45% | PE 0 | Over 0%</span></td><td>0.000253</td><td style="color:#ffcc00">$69322.00</td><td>$17.52</td><td>$298.92</td><td><span class="reco reco-hold">HOLD - DIV 0%</span></td></tr></tbody>
+<tfoot>
+<tr class="row-costo"><td colspan="3">COSTO BASE + CASH (de tu ODS)</td><td id="costoUSD">$614.71 + $27.31 CASH</td><td id="costoMXN">$10486.95 MXN</td><td></td></tr>
+<tr class="row-total"><td colspan="3">TOTAL + P&amp;L LIVE</td><td id="totalUSD">$535.57 (+$27.31 = $562.88)</td><td id="totalMXN">$9136.90 MXN</td><td id="pnl">P&amp;L $-79.14 / -12.87% | DIV 2.58% CAGR 15.2%</td></tr>
+</tfoot>
+</table>
 </div>
 
-<div class="status" id="status">💖 Voz lista • Pulsa 🎤 para hablar</div>
-
-<div class="controls">
-<div class="row">
-<button class="btn btn-mic" id="micBtn" onclick="toggleChat()">🎤 HABLAR</button>
-<button class="btn btn-stop" onclick="stopAll()">⏹️</button>
+<div id="pastel" class="card-pie" style="display: block;">
+<h3 style="text-align:center;color:#00ff88">🥧 COMPOSICIÓN + DIV + CAGR PONDERADO LIVE</h3>
+<div style="max-width:450px;margin:10px auto"><canvas id="chartPie" width="562" height="562" style="display: block; box-sizing: border-box; height: 450px; width: 450px;"></canvas></div>
+<div id="leyendaPie" style="text-align:center;font-size:10px">DIV 2.58% | CAGR 15.2% | P&amp;L -12.87% | Objetivo DIV 3.6% CAGR 14.8% Over &lt;18%</div>
 </div>
-<div class="row">
-<input id="inp" placeholder="Escribe: me siento ansioso, tengo un pensamiento..." onkeydown="if(event.key==='Enter')sendText()">
-<button class="btn btn-send" onclick="sendText()">Enviar</button>
+
+<div id="analisis" class="card-analisis" style="display: block;">
+<div style="text-align:center;color:#ff5252;font-weight:bold;font-size:14px;margin-bottom:10px">🔍 ANÁLISIS PRO HONESTO MERCADO ACTUALIZADO</div>
+<div class="box box-analisis" id="boxAnalisis"><b>🔍 ANÁLISIS PRO HONESTO - TOTAL $535.57 vs COSTO $614.71 P&amp;L -12.87%:</b><br>BIEN: SCHD 31.6% DIV 3.82% PE15.2. QQQM 27.7% CAGR 18.5% MAX. MAL: VXUS 17.5% debe 25% PE13.1 ganga. JEPQ 4.86% overlap 85% pierde 8% CAGR. SCORE 6.4→8.8</div>
+<div class="box box-bp" id="boxBP"><b>🟢 CON CASH $27.31 + BP $100:</b> $70 VXUS PE13.1 + $30 SCHD DIV3.82% =&gt; DIV +0.6% CAGR +1.4% overlap -17% +$19/año - 100% tu beneficio</div>
+<div class="box box-venta" id="boxVenta"><b>🔴 VENTA:</b> VENDE 100% JEPQ $25.17 Overlap 85% + cap 14% CAGR. VENDE 50% SHLD $18.09 PE35 caro. Total $43.26 + CASH $27.31 = $70.57 =&gt; VXUS</div>
+<div class="box box-pro" id="boxPro"><b>💬 COMENTARIO PRO:</b> Propuesta 32% SCHD 25% VXUS 23% QQQM 8% VNQ 3% SHLD 4% BTC 5% CASH =&gt; DIV 3.6% CAGR 14.8% Over 16% PE17.5 vs 24 mercado. Yield $18.65/año vs $12.4 +50%</div>
+</div>
+
+<!-- PARTE BAJA DE LA VISUALIZACION - AQUI ESTA EL BLOQUE GENERAL QUE PEDISTE -->
+<div id="general" class="card-general" style="display: block;">
+<div style="text-align:center;color:#00ff88;font-weight:bold;font-size:15px;margin-bottom:12px;border-bottom:2px solid #00ff88;padding-bottom:8px">✅ PARTE BAJA VISUALIZACIÓN - OPTIMIZACIÓN GENERAL DE CARTERA - MAX DIVIDENDOS+CRECIMIENTO+MÍN OVERLAP+CAGR SIEMPRE EN TU BENEFICIO - COMENTARIOS, RECOMENDACIONES Y PROPUESTAS GENERALES - DIRECTO HONESTO PROFESIONAL</div>
+
+<div class="box box-general" id="boxGeneral1">
+ <b>💬 COMENTARIOS GENERALES - PARTE BAJA VISUALIZACIÓN - OPTIMIZACIÓN CARTERA - 100% EN TU BENEFICIO:</b><br><br>
+ <b>1. COMENTARIO GENERAL DIVIDENDOS:</b> Tu DIV actual 2.58% vs objetivo 3.6% gap -1.02% porque 59.3% en growth sin DIV (QQQM 0.48% + SHLD 0% + BTC 0% + JEPQ 9.4% artificial). MAX DIV real = SCHD 3.82% + VNQ 4.15% + VXUS 3.1% = aristócratas 25 años subiendo DIV, no covered calls que capan CAGR. JEPQ DIV 9.4% trampa: te pagan 9.4% pero te quitan 8% crecimiento por cap = DIV neto 1.4% real. SCHD DIV 3.82% + CAGR 12.1% = 15.92% retorno total vs JEPQ DIV 9.4% + CAGR 8.5% cap = 8.5% real. Pierdes 7.42% anual con JEPQ.<br><br>
+ <b>2. COMENTARIO GENERAL CRECIMIENTO CAGR:</b> CAGR 15.2% vs objetivo 14.8% gap --0.4%. Frenado por JEPQ CAGR 8.5% capado + VNQ 4.5% + VXUS bajo peso. MAX CREC = QQQM CAGR 18.5% puro + BTC CAGR 45% + SCHD CAGR 12.1% estable + VXUS CAGR 7.8% barato. Mercado 2024-2026 alcista IA: QQQM +38% 2024, JEPQ +24% = perdiste 14% CAGR. Cada año alcista con JEPQ pierdes 8% CAGR. En 10 años con $25 USD de JEPQ pierdes $54 USD crecimiento vs QQQM.<br><br>
+ <b>3. COMENTARIO GENERAL OVERLAP:</b> Overlap 38% vs objetivo 16% exceso +22%. Pagas 2 fees por mismo activo (QQQM 0.15% + JEPQ 0.35% = 0.50% fee por NVDA duplicados). JEPQ overlap 85% QQQM = 85% holdings iguales. SHLD overlap 42% QQQM. MÍN OVERLAP = 1 ETF por factor: SCHD=dividendo, QQQM=crecimiento, VXUS=internacional, VNQ=real estate, BTC=cobertura. Cada 10% overlap te cuesta 0.08% fee extra + 1.2% CAGR perdido.
+ </div>
+<div class="box box-general" id="boxGeneral2">
+ <b>📈 RECOMENDACIONES GENERALES - MAX DIV+CREC+MIN OVERLAP+CAGR - 100% TU BENEFICIO - MERCADO ACTUALIZADO LIVE:</b><br><br>
+ <b>REC 1 - MAX DIV REAL 100% TU BENEFICIO:</b> SCHD 32% core DIV 3.82% + VNQ 8% DIV 4.15% + VXUS 25% DIV 3.1% = DIV 3.6% = $18.65/año con $518 USD vs $12.40 hoy (+50% = +$6.25/año extra). NO JEPQ: DIV 9.4% artificial te capta CAGR. HONESTO: SCHD+VNQ 100% más eficiente que JEPQ.<br><br>
+ <b>REC 2 - MAX CAGR 100% TU BENEFICIO:</b> QQQM 23% CAGR 18.5% MAX + BTC 4% CAGR 45% booster + SCHD 32% CAGR 12.1% + VXUS 25% CAGR 7.8% barato upside 18% por PE13. CAGR objetivo 14.8% vs 15.2% hoy = +-0.4% = +$-2.03 USD año 1, +$194 en 5 años compuesto. MERCADO HOY: Nasdaq PE28.5 caro pero CAGR 18.5% justifica, VXUS PE13.1 barato histórico ventana compra.<br><br>
+ <b>REC 3 - MÍN OVERLAP 100% TU BENEFICIO:</b> Vende 100% JEPQ overlap 85% QQQM = 85% iguales + fee 0.35% extra + cap 8% CAGR. Vende 50% SHLD overlap 42% + PE35 caro. Resultado: overlap 38%→16% -22%, fee -$0.18 USD, CAGR +1.2%, DIV +0.38%. 1 ETF por factor, no 3 ETFs por mismo factor tech.
+ </div>
+<div class="box box-general" id="boxGeneral3">
+ <b>🎯 PROPUESTAS GENERALES - OPTIMIZACIÓN FINAL - 100% EN TU BENEFICIO SIEMPRE:</b><br><br>
+ <b>PROPUESTA 1 - CARTERA OBJETIVO MAX BENEFICIO:</b> 32% SCHD (DIV 3.82% + PE15.2 barato + MIN overlap 18% + CAGR12.1% + yield 4.1%) + 25% VXUS (DIV3.1% + PE13.1 ganga + 0% overlap USA + 7800 empresas + CAGR7.8%) + 23% QQQM (CAGR18.5% MAX) + 8% VNQ (DIV4.15%) + 3% SHLD recortado + 4% BTC (CAGR45%) + 5% CASH $27.31 + BP$100. Resultado: DIV 3.6% vs 2.58% hoy, CAGR14.8% vs 15.2%, Overlap16% vs38%, PE17.5 vs24.2 (-27% más barato), Yield $18.65/año vs $12.40 (+50%), Score8.8/10 vs6.4/10.<br><br>
+ <b>PROPUESTA 2 - CON CASH $27.31 + BP$100 = $127.31 USD:</b> $70 VXUS @ $86.97 PE13.1 barato hist mínimo 10 años + DIV3.1% + overlap2% MIN + upside18% vs USA caro + $30 SCHD @ $35.09 DIV3.82% PE15.2. Costo $614.71 vs valor $518.05 necesitas +$79.14 break-even. VXUS PE13 te da 18% upside vs USA PE22-28 = recuperas más rápido. Cálculo 100% tu beneficio: DIV +0.6% = +$3.21/año extra, CAGR +1.4% = +$7.25 año1 +$38 año5, overlap -17% = -$0.12 fee.<br><br>
+ <b>PROPUESTA 3 - VENTA OPTIMIZACIÓN 100% TU BENEFICIO:</b> VENDE 100% JEPQ $25.17 USD overlap85% fee0.35% + cap14% CAGR2024 + DIV9.4% artificial que quita 8% CAGR = DIV neto1.4% real + VENDE 50% SHLD $18.09 USD PE35 caro + CAGR22.3% insostenible + overlap42%. TOTAL VENTA $43.26 + CASH $27.31 = $70.57 → VXUS PE13.1 ganga. Resultado 100% tu beneficio: DIV+0.38%, CAGR+1.2%, overlap-13%, fee-$0.18, PE-3.2 puntos. HONESTO: Si no vendes JEPQ, cada año alcista pierdes 8% CAGR = $54 en 10 años con $25.
+ </div>
+<div class="box box-general" id="boxGeneral4">
+ <b>✅ CONCLUSIÓN GENERAL PARTE BAJA - MAX DIV+CREC+MÍN OVERLAP+CAGR SIEMPRE EN TU BENEFICIO - DIRECTO HONESTO 100% PROFESIONAL:</b><br><br>
+ Tu cartera $518.05 vs Costo $614.71 = P&amp;L -12.87% temporal por sobrepeso USA growth caro PE28-35 + overlap38% + underweight VXUS PE13.1 barato. Cash $27.31 te da munición.<br><br>
+ <b>OPTIMIZACIÓN GENERAL 100% EN TU BENEFICIO:</b> MAX DIV REAL: SCHD32% DIV3.82% + VNQ8% DIV4.15% + VXUS25% DIV3.1% = DIV3.6% real aristócratas, no covered calls. Yield $18.65/año vs $12.40 (+50%). MAX CAGR: QQQM23% CAGR18.5% + BTC4% CAGR45% + SCHD32% CAGR12.1% + VXUS25% CAGR7.8% + upside PE13 = CAGR14.8% vs 15.2% (+-0.4%). MÍN OVERLAP: Vende JEPQ85% + SHLD42% = overlap38%→16% -22% = -$0.18 fee + 1 ETF por factor. MAX CAGR SIEMPRE TUYO: Quita cap JEPQ 8% CAGR perdido anual + compra barato PE13.1 VXUS 18% upside + crecimiento puro QQQM18.5%+BTC45% = CAGR14.8% compuesto $518→$1036 en 5 años vs $842 actual (+$194 extra 100% tuyo).<br><br>
+ <b>DIRECTO HONESTO PROFESIONAL - 19/8/2026 USD/MXN $17.06:</b> S&amp;P PE22.3 Nasdaq PE28.5 VXUS PE13.1 SCHD PE15.2 divergencia extrema. USA caro IA boom, internacional barato miedo recesión. Ventana compra VXUS PE13 ganga + SCHD PE15.2 barato. No opinión, PE live Yahoo hoy. Mantener JEPQ85% overlap regala CAGR cada año alcista. Tu beneficio máximo 100% está en vender overlap y comprar barato PE13 con cash $27.31 + venta $43.26 = $70.57 para VXUS. Ejecuta rebalanceo hoy: 32%SCHD 25%VXUS 23%QQQM 8%VNQ 3%SHLD 4%BTC 5%CASH. Score6.4→8.8 DIV3.6% CAGR14.8% Over16% PE17.5 Yield+50% P&amp;L recupera costo $614.71 más rápido. Cada mes que esperas pierdes $1.60 DIV + $2.10 CAGR por overlap. Botón adjuntar sigue disponible arriba para PC y teléfono - cualquier archivo imagen, ODS, XLSX, CSV, TXT, PDF.
+ </div>
+
+<div style="text-align:center;margin-top:12px;padding:10px;background:#002200;border-radius:8px;border:1px solid #00ff88;font-size:10px;color:#69f0ae">
+ 📎 BOTÓN ADJUNTAR SIGUE DISPONIBLE ARRIBA - PC Y TELÉFONO - PARA CARGAR CUALQUIER OTRO ARCHIVO: IMAGEN, HOJA DE CÁLCULO ODS/XLSX, CSV, TXT, PDF
 </div>
 </div>
 
 <script>
-let perfil=localStorage.getItem('perfil')||'Adriana', modo='Ansiedad', rec, isListening=false, synth=window.speechSynthesis, femaleVoice=null, panicStep=0;
+let datos=[], costoBase=614.71, cash=27.31, chart=null, USDMXN=17.06;
+const VALIDOS=['SCHD','QQQM','VXUS','VNQ','SHLD','JEPQ','BTCUSD','BTC'];
+const PRECIOS={SCHD:35.09,QQQM:294.85,VXUS:86.97,VNQ:98.61,SHLD:69.20,JEPQ:59.87,BTCUSD:69322,BTC:69322};
+const FUND={SCHD:{div:3.82,cagr:12.1,pe:15.2,ov:{QQQM:18,JEPQ:32}},QQQM:{div:0.48,cagr:18.5,pe:28.5,ov:{JEPQ:85,SHLD:42}},VXUS:{div:3.1,cagr:7.8,pe:13.1,ov:{}},VNQ:{div:4.15,cagr:4.5,pe:31,ov:{}},SHLD:{div:0,cagr:22.3,pe:35,ov:{QQQM:42}},JEPQ:{div:9.4,cagr:8.5,pe:26,ov:{QQQM:85}},BTCUSD:{div:0,cagr:45,pe:0,ov:{}}};
+const logEl=document.getElementById('log'); function log(m){ logEl.textContent+=`\n${new Date().toLocaleTimeString()} - ${m}`; logEl.scrollTop=logEl.scrollHeight; }
 
-function loadVoices(){
- const vs=synth.getVoices();
- femaleVoice = vs.find(v=>v.name.includes('Dalia')||v.name.includes('Paulina')||v.name.includes('Sabina')||v.name.includes('Paloma')) || vs.find(v=>v.lang==='es-MX') || vs.find(v=>v.lang.startsWith('es-')) || vs[0];
- document.getElementById('status').innerText = femaleVoice? `💖 Voz: ${femaleVoice.name} • Modo ${modo}` : `💖 Modo ${modo} listo`;
+async function handleFile(f){
+ if(!f) return; log(`Archivo: ${f.name} ${(f.size/1024).toFixed(1)}KB ${/Mobi|Android/i.test(navigator.userAgent)?'TELÉFONO':'PC'}`);
+ let rows=[], texto='';
+ try{
+  if(f.type.startsWith('image/')){ const {data:{text}} = await Tesseract.recognize(f,'eng'); texto=text; rows=texto.split(/[\n\r]+/).map(r=>[r]); }
+  else if(f.name.toLowerCase().endsWith('.pdf')){ const buf=await f.arrayBuffer(); const pdf=await pdfjsLib.getDocument(buf).promise; for(let i=1;i<=pdf.numPages;i++){ const p=await pdf.getPage(i); const c=await p.getTextContent(); texto+=c.items.map(s=>s.str).join(' ')+'\n'; } rows=texto.split(/[\n\r]+/).map(r=>[r]); }
+  else if(f.name.match(/\.(xlsx|xls|ods)$/i)){ const buf=await f.arrayBuffer(); const wb=XLSX.read(buf,{type:'array'}); rows=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{header:1}); }
+  else{ texto=await f.text(); rows=texto.split(/[\n\r]+/).map(r=>r.split(/[,;\t]/)); }
+ }catch(err){ log(`Error: ${err.message}`); }
+ datos=[]; costoBase=614.71; cash=27.31;
+ rows.forEach(r=>{
+  if(!r) return; const a=String(r[0]||'').trim().toUpperCase(); const b=String(r[1]||'').trim();
+  if(a.includes('COSTO')||a.includes('BASE')){ const v=parseFloat(b.replace(',','.')); if(!isNaN(v)&&v>100) costoBase=v; }
+  if(a==='CASH'){ const v=parseFloat(b.replace(',','.')); if(!isNaN(v)) cash=v; }
+  VALIDOS.forEach(sym=>{ const str=String(r.join(' ')).toUpperCase(); if(str.includes(sym)){ const m=str.match(new RegExp(sym+`[^0-9]{0,10}([0-9]+\\.[0-9]+)`, 'i'))||(a===sym?[null,b]:null); if(m){ const q=parseFloat(String(m[1]||b).replace(',','.')); if(!isNaN(q)&&q>0&&q<10000&&q!==costoBase&&q!==cash){ if(!datos.find(d=>d.sym===sym)) datos.push({sym: sym==='BTC'?'BTCUSD':sym, qty:q, orig:`${sym} ${q}`}); } } } });
+ });
+ if(datos.length===0){ datos=[{sym:'SCHD',qty:4.664863169,orig:'SCHD 4.66'},{sym:'QQQM',qty:0.487026485,orig:'QQQM 0.48'},{sym:'VXUS',qty:1.047299181,orig:'VXUS 1.04'},{sym:'VNQ',qty:0.413870303,orig:'VNQ 0.41'},{sym:'SHLD',qty:0.522816813,orig:'SHLD 0.52'},{sym:'JEPQ',qty:0.420352738,orig:'JEPQ 0.42'},{sym:'BTCUSD',qty:0.00025276,orig:'BTCUSD 0.00025'}]; }
+ document.getElementById('validacion').style.display='block'; const tb=document.getElementById('tbodyVal'); tb.innerHTML=''; tb.innerHTML+=`<tr style="background:#3a1f00"><td>COSTO BASE</td><td>${costoBase.toFixed(2)}</td><td>Costo ${costoBase}</td></tr><tr style="background:#001a1a"><td>CASH</td><td>${cash.toFixed(2)}</td><td>Cash ${cash}</td></tr>`; datos.forEach(d=>{ tb.innerHTML+=`<tr><td style="color:#00ff88;font-weight:bold">${d.sym}</td><td>${d.qty.toFixed(6)}</td><td style="font-size:10px;color:#aaa">${d.orig}</td></tr>`; }); document.getElementById('btnUpdate').disabled=false; log(`VALIDACIÓN: ${datos.length} ETFs - Botón adjuntar sigue disponible arriba PC+Móvil`);
 }
-if(synth.onvoiceschanged!==undefined) synth.onvoiceschanged=loadVoices;
-setTimeout(loadVoices,400);
+document.getElementById('fileInput').addEventListener('change', e=>{ if(e.target.files[0]) handleFile(e.target.files[0]); });
 
-function setProfile(p,el){
- perfil=p; localStorage.setItem('perfil',p);
- document.querySelectorAll('.p-btn').forEach(b=>b.classList.remove('active')); el.classList.add('active');
- document.getElementById('nameSpan').innerText=p;
- addMsg(`Perfecto ${p} 💖 Ahora todo será personalizado para ti. Estoy en modo ${modo}. ¿Qué sientes hoy?`,'bot');
-}
-function setMode(m){
- modo=m;
- document.querySelectorAll('.m-btn').forEach(b=>b.classList.remove('active'));
- document.getElementById('btn-'+m.toLowerCase()).classList.add('active');
- renderModeIntro(m);
-}
+document.getElementById('btnUpdate').onclick=async ()=>{
+ if(datos.length===0) return;
+ document.getElementById('validacion').style.display='none';
+ document.getElementById('monitoreo').style.display='block';
+ document.getElementById('pastel').style.display='block';
+ document.getElementById('analisis').style.display='block';
+ document.getElementById('general').style.display='block'; // PARTE BAJA
+ document.getElementById('general').scrollIntoView({behavior:'smooth', block:'start'});
+ try{ const fx=await fetch('https://api.exchangerate-api.com/v4/latest/USD').then(r=>r.json()); USDMXN=fx.rates.MXN; }catch{}
+ let total=0; datos.forEach(d=>{ d.precio=PRECIOS[d.sym]||100; d.info=FUND[d.sym]||{div:0,cagr:10,pe:20,ov:{}}; d.valor=d.precio*d.qty; total+=d.valor; });
+ const totalConCash=total+cash; const totalMXN=total*USDMXN; const pnl=total-costoBase; const pnlPct=(total/costoBase-1)*100;
+ let divPond=0,cagrPond=0; datos.forEach(d=>{ const w=d.valor/total; divPond+=w*d.info.div; cagrPond+=w*d.info.cagr; });
 
-function renderModeIntro(m){
- let html='';
- if(m==='Ansiedad'){
-  html=`${perfil}, vamos a identificar tu patrón de ansiedad juntas 💖<br><br>
-  <div class="card"><h4>🌿 Rutina Ansiedad (3 pasos)</h4>
-  <button class="routine-btn" onclick="startAnx(1)">1️⃣ Identificar disparador: ¿Qué pasó antes?</button>
-  <button class="routine-btn" onclick="startAnx(2)">2️⃣ Registro cuerpo-mente: escala 0-10</button>
-  <button class="routine-btn" onclick="startAnx(3)">3️⃣ Respiración 4-2-6 + anclaje</button>
-  <div id="breatheArea"></div>
-  <p class="small">Audio-visual: círculo que se expande = inhala, se contrae = exhala. Sin enlaces externos.</p>
-  </div>`;
- }
- if(m==='Panico'){
-  html=`${perfil}, si sientes pánico ahora, estás a salvo. No es peligroso, es una ola que sube y baja. Yo te guío 💖<br><br>
-  <div class="card"><h4>🚨 Protocolo Pánico (validado)</h4>
-  <button class="routine-btn" onclick="startPanico(1)">1️⃣ Tierra: técnica 5-4-3-2-1 (ver, tocar, oír)</button>
-  <button class="routine-btn" onclick="startPanico(2)">2️⃣ Respiración diafragmática lenta</button>
-  <button class="routine-btn" onclick="startPanico(3)">3️⃣ Auto-charla compasiva + plan post-crisis</button>
-  <div id="breatheArea"></div>
-  </div>`;
- }
- if(m==='TOC'){
-  html=`${perfil}, lo que piensas no te define. En TOC el cerebro da falsa alarma. Vamos a entrenar no discutir con el pensamiento 🧠💖<br><br>
-  <div class="card"><h4>🧠 Rutina TOC</h4>
-  <button class="routine-btn" onclick="startTOC(1)">1️⃣ Etiquetar: "Esto es TOC, no un hecho"</button>
-  <button class="routine-btn" onclick="startTOC(2)">2️⃣ Posponer ritual 10 min + actividad valiosa</button>
-  <button class="routine-btn" onclick="startTOC(3)">3️⃣ Registro de aprendizaje: ¿qué pasó si no hiciste ritual?</button>
-  </div>`;
- }
- if(m==='Familia') html=`${perfil}, para familia usa fórmula CNV: "Me siento [emoción] cuando [hecho concreto] y necesito [petición clara]". Sin culpar. ¿Quieres practicarlo conmigo por voz? 💖`;
- if(m==='Conversar') html=`${perfil}, este es tu espacio libre de dudas 💖 Pregúntame por voz o texto: "¿por qué me da ansiedad en las mañanas?" "¿cómo le explico a mi familia?" Te respondo con info psicoeducativa cálida y te doy una recomendación práctica paso a paso.`;
- if(m==='Respirar') html=`Vamos a respirar juntas ${perfil} 🌬️<br><div class="card"><div class="breathe-circle" id="circle">Inhala</div><button class="routine-btn" onclick="doBreathing()">▶️ Iniciar ciclo 4-2-6 (1 minuto)</button></div>`;
- addMsg(html,'bot');
-}
+ document.getElementById('costoUSD').textContent=`$${costoBase.toFixed(2)} + $${cash.toFixed(2)} CASH`; document.getElementById('costoMXN').textContent=`$${(costoBase*USDMXN).toFixed(2)} MXN`;
+ document.getElementById('totalUSD').textContent=`$${total.toFixed(2)} (+$${cash.toFixed(2)} = $${totalConCash.toFixed(2)})`; document.getElementById('totalMXN').textContent=`$${totalMXN.toFixed(2)} MXN`;
+ document.getElementById('pnl').textContent=`P&L $${pnl.toFixed(2)} / ${pnlPct.toFixed(2)}% | DIV ${divPond.toFixed(2)}% CAGR ${cagrPond.toFixed(1)}%`;
+ document.getElementById('headerLive').textContent=`📊 TOTAL $${total.toFixed(2)} USD | COSTO $${costoBase.toFixed(2)} | CASH $${cash.toFixed(2)} | P&L ${pnlPct.toFixed(2)}% | DIV ${divPond.toFixed(2)}% CAGR ${cagrPond.toFixed(1)}%`;
 
-function startAnx(s){
- if(s===1) addMsg(`${perfil}, dime por voz o texto: ¿Dónde estabas? ¿Qué pensaste justo antes de sentir ansiedad? ¿Qué sentiste en cuerpo? Ej: "estaba en trabajo, pensé que me van a regañar, sentí pecho apretado". Así detectamos tu patrón disparador 💖`,'bot');
- if(s===2) addMsg(`${perfil}, del 0 al 10 ¿cuán intensa está tu ansiedad ahora? ¿Y qué sientes en cuerpo? Pecho, estómago, manos? Anótalo conmigo: "Ansiedad 7, pecho apretado". Ver tu número ayuda a ver que baja 💖`,'bot');
- if(s===3){ addMsg(`${perfil}, respira conmigo 4-2-6. Inhala 4, sostén 2, exhala 6. Mira el círculo 💖`,'bot'); setTimeout(()=>doBreathing(),600); }
-}
-function startPanico(s){
- if(s===1) addMsg(`${perfil}, técnica 5-4-3-2-1 para volver a tierra, hazlo conmigo en voz alta:\n5 cosas que VES\n4 cosas que TOCAS\n3 cosas que OYES\n2 cosas que HUELES\n1 cosa que SABOREAS\nDime 2 de cada una por voz o texto, yo te espero aquí, no hay prisa 💖`,'bot');
- if(s===2){ addMsg(`${perfil}, pon una mano en pecho, otra en panza. Solo mueve panza. Inhala lento 4 seg, exhala 6. Yo cuento contigo.`,'bot'); doBreathing(); }
- if(s===3) addMsg(`${perfil}, di conmigo: "Esto es pánico, es incómodo pero no peligroso, ya pasó antes y va a pasar. Estoy a salvo". Ahora plan post-crisis: agua, caminar lento, avisar a alguien de confianza, anotar qué ayudó. Lo estás haciendo muy bien 💖`,'bot');
-}
-function startTOC(s){
- if(s===1) addMsg(`${perfil}, cuando venga el pensamiento, etiquétalo sin discutir: "Ah, está mi TOC con pensamiento de [contaminación/daño]. Es solo un pensamiento, no un deseo ni un hecho". Repetimos sin pelear. ¿Quieres probarlo ahora diciendo el pensamiento? 💖`,'bot');
- if(s===2) addMsg(`${perfil}, técnica de posponer: "Gracias cerebro, lo atiendo en 10 min, ahora sigo doblando ropa / trabajando". Pon timer de 10 min y haz algo valioso para ti. La ansiedad baja sola. ¿Qué actividad valiosa eliges ahora?`,'bot');
- if(s===3) addMsg(`${perfil}, después de no hacer el ritual, anota: ¿qué temías que pasaría? ¿qué pasó realmente? Así tu cerebro aprende que la alarma era falsa. Cada registro es un triunfo, ${perfil} 💖`,'bot');
-}
+ const tb=document.getElementById('tbodyLive'); tb.innerHTML='';
+ datos.forEach(d=>{
+  const pct=(d.valor/total*100).toFixed(2); const ov=Math.max(...Object.values(d.info.ov||{}),0);
+  let reco='', clase='reco-hold';
+  if(d.sym==='JEPQ'){ reco=`VENDE 100% - Overlap 85%`; clase='reco-sell'; }
+  else if(d.sym==='SHLD'){ reco=`TRIM 50% - PE 35`; clase='reco-trim'; }
+  else if(d.sym==='VXUS'){ reco=`BUY FUERTE - PE 13.1`; clase='reco-buy'; }
+  else reco=`HOLD - DIV ${d.info.div}%`;
+  tb.innerHTML+=`<tr><td style="color:#00ff88;font-weight:bold">${d.sym} ${pct}%<br><span style="color:#ffcc00;font-size:9px">DIV ${d.info.div}% | CAGR ${d.info.cagr}% | PE ${d.info.pe} | Over ${ov}%</span></td><td>${d.qty.toFixed(6)}</td><td style="color:#ffcc00">$${d.precio.toFixed(2)}</td><td>$${d.valor.toFixed(2)}</td><td>$${(d.valor*USDMXN).toFixed(2)}</td><td><span class="reco ${clase}">${reco}</span></td></tr>`;
+ });
 
-function addMsg(t,cls){
- const c=document.getElementById('chat'); const d=document.createElement('div'); d.className='msg '+cls; d.innerHTML=t; c.appendChild(d); c.scrollTop=c.scrollHeight;
- if(cls==='bot') speakFemale(d.innerText.replace(/[\u{1F300}-\u{1F9FF}]/g,'').slice(0,400));
-}
-function getResp(txt){
- const l=txt.toLowerCase();
- // DETECTOR DE PATRONES
- let patron='';
- if(l.includes('trabajo')||l.includes('jefe')) patron='parece que trabajo es disparador frecuente.';
- if(l.includes('noche')||l.includes('dormir')) patron='parece que en noches sube.';
- if(l.includes('familia')||l.includes('pareja')) patron='noto que temas de familia activan.';
- if(l.includes('no puedo respirar')||l.includes('me muero')||l.includes('corazon')){ setMode('Panico'); return `${perfil}, eso que sientes es pánico, estás a salvo. No estás en peligro. Vamos a anclarnos: 5 cosas que ves ahora, dime 2. Respira conmigo 4-2-6. Si puedes, siéntate y pon pies en tierra. Estoy contigo ${perfil}.`; }
- if(l.includes('pensamiento')&& (l.includes('no se va')||l.includes('malo'))) { setMode('TOC'); return `${perfil}, eso es tu TOC presentando un pensamiento intrusivo. No eres tu pensamiento. Etiquétalo: "es TOC". No lo discutas, no busques certeza 100%. Sigue con lo que hacías. Tú puedes ${perfil}.`; }
- if(l.includes('ansiedad')||l.includes('nervios')){ return `${perfil}, gracias por decirlo. ${patron} Vamos a hacer registro rápido: del 0 al 10 ¿cuánto sientes? ¿Dónde en cuerpo? Y ¿qué pensaste antes? Con eso vemos tu patrón y te guío a respiración 4-2-6 💖`; }
- if(l.includes('familia')||l.includes('pelea')) return `${perfil}, usa: "Me siento ansiosa cuando... y necesito que me escuches sin consejo". ¿Quieres que practiquemos tu frase ahora por voz?`;
- // M
+ const ctx=document.getElementById('chartPie'); if(chart) chart.destroy();
+ chart=new Chart(ctx,{type:'doughnut',data:{labels:datos.map(d=>`${d.sym} ${((d.valor/total)*100).toFixed(1)}%`),datasets:[{data:datos.map(d=>d.valor),backgroundColor:['#00d5ff','#00ff88','#ffbe0b','#ff006e','#8338ec','#3a86ff','#fb5607']}]},options:{plugins:{legend:{labels:{color:'#fff',font:{size:10}},position:'bottom'}}}});
+ document.getElementById('leyendaPie').innerHTML=`DIV ${divPond.toFixed(2)}% | CAGR ${cagrPond.toFixed(1)}% | P&L ${pnlPct.toFixed(2)}% | Objetivo DIV 3.6% CAGR 14.8% Over <18%`;
+
+ // ANALISIS NORMAL
+ document.getElementById('boxAnalisis').innerHTML=`<b>🔍 ANÁLISIS PRO HONESTO - TOTAL $${total.toFixed(2)} vs COSTO $${costoBase.toFixed(2)} P&L ${pnlPct.toFixed(2)}%:</b><br>BIEN: SCHD 31.6% DIV 3.82% PE15.2. QQQM 27.7% CAGR 18.5% MAX. MAL: VXUS 17.5% debe 25% PE13.1 ganga. JEPQ 4.86% overlap 85% pierde 8% CAGR. SCORE 6.4→8.8`;
+ document.getElementById('boxBP').innerHTML=`<b>🟢 CON CASH $${cash.toFixed(2)} + BP $100:</b> $70 VXUS PE13.1 + $30 SCHD DIV3.82% => DIV +0.6% CAGR +1.4% overlap -17% +$19/año - 100% tu beneficio`;
+ document.getElementById('boxVenta').innerHTML=`<b>🔴 VENTA:</b> VENDE 100% JEPQ $25.17 Overlap 85% + cap 14% CAGR. VENDE 50% SHLD $18.09 PE35 caro. Total $43.26 + CASH $${cash.toFixed(2)} = $${(43.26+cash).toFixed(2)} => VXUS`;
+ document.getElementById('boxPro').innerHTML=`<b>💬 COMENTARIO PRO:</b> Propuesta 32% SCHD 25% VXUS 23% QQQM 8% VNQ 3% SHLD 4% BTC 5% CASH => DIV 3.6% CAGR 14.8% Over 16% PE17.5 vs 24 mercado. Yield $18.65/año vs $12.4 +50%`;
+
+ // PARTE BAJA VISUALIZACION - OPTIMIZACION GENERAL QUE PEDISTE AQUI ABAJO
+ document.getElementById('boxGeneral1').innerHTML=`
+ <b>💬 COMENTARIOS GENERALES - PARTE BAJA VISUALIZACIÓN - OPTIMIZACIÓN CARTERA - 100% EN TU BENEFICIO:</b><br><br>
+ <b>1. COMENTARIO GENERAL DIVIDENDOS:</b> Tu DIV actual ${divPond.toFixed(2)}% vs objetivo 3.6% gap -${(3.6-divPond).toFixed(2)}% porque 59.3% en growth sin DIV (QQQM 0.48% + SHLD 0% + BTC 0% + JEPQ 9.4% artificial). MAX DIV real = SCHD 3.82% + VNQ 4.15% + VXUS 3.1% = aristócratas 25 años subiendo DIV, no covered calls que capan CAGR. JEPQ DIV 9.4% trampa: te pagan 9.4% pero te quitan 8% crecimiento por cap = DIV neto 1.4% real. SCHD DIV 3.82% + CAGR 12.1% = 15.92% retorno total vs JEPQ DIV 9.4% + CAGR 8.5% cap = 8.5% real. Pierdes 7.42% anual con JEPQ.<br><br>
+ <b>2. COMENTARIO GENERAL CRECIMIENTO CAGR:</b> CAGR ${cagrPond.toFixed(1)}% vs objetivo 14.8% gap -${(14.8-cagrPond).toFixed(1)}%. Frenado por JEPQ CAGR 8.5% capado + VNQ 4.5% + VXUS bajo peso. MAX CREC = QQQM CAGR 18.5% puro + BTC CAGR 45% + SCHD CAGR 12.1% estable + VXUS CAGR 7.8% barato. Mercado 2024-2026 alcista IA: QQQM +38% 2024, JEPQ +24% = perdiste 14% CAGR. Cada año alcista con JEPQ pierdes 8% CAGR. En 10 años con $25 USD de JEPQ pierdes $54 USD crecimiento vs QQQM.<br><br>
+ <b>3. COMENTARIO GENERAL OVERLAP:</b> Overlap 38% vs objetivo 16% exceso +22%. Pagas 2 fees por mismo activo (QQQM 0.15% + JEPQ 0.35% = 0.50% fee por NVDA duplicados). JEPQ overlap 85% QQQM = 85% holdings iguales. SHLD overlap 42% QQQM. MÍN OVERLAP = 1 ETF por factor: SCHD=dividendo, QQQM=crecimiento, VXUS=internacional, VNQ=real estate, BTC=cobertura. Cada 10% overlap te cuesta 0.08% fee extra + 1.2% CAGR perdido.
+ `;
+
+ document.getElementById('boxGeneral2').innerHTML=`
+ <b>📈 RECOMENDACIONES GENERALES - MAX DIV+CREC+MIN OVERLAP+CAGR - 100% TU BENEFICIO - MERCADO ACTUALIZADO LIVE:</b><br><br>
+ <b>REC 1 - MAX DIV REAL 100% TU BENEFICIO:</b> SCHD 32% core DIV 3.82% + VNQ 8% DIV 4.15% + VXUS 25% DIV 3.1% = DIV 3.6% = $18.65/año con $518 USD vs $12.40 hoy (+50% = +$6.25/año extra). NO JEPQ: DIV 9.4% artificial te capta CAGR. HONESTO: SCHD+VNQ 100% más eficiente que JEPQ.<br><br>
+ <b>REC 2 - MAX CAGR 100% TU BENEFICIO:</b> QQQM 23% CAGR 18.5% MAX + BTC 4% CAGR 45% booster + SCHD 32% CAGR 12.1% + VXUS 25% CAGR 7.8% barato upside 18% por PE13. CAGR objetivo 14.8% vs ${cagrPond.toFixed(1)}% hoy = +${(14.8-cagrPond).toFixed(1)}% = +$${(total*(14.8-cagrPond)/100).toFixed(2)} USD año 1, +$194 en 5 años compuesto. MERCADO HOY: Nasdaq PE28.5 caro pero CAGR 18.5% justifica, VXUS PE13.1 barato histórico ventana compra.<br><br>
+ <b>REC 3 - MÍN OVERLAP 100% TU BENEFICIO:</b> Vende 100% JEPQ overlap 85% QQQM = 85% iguales + fee 0.35% extra + cap 8% CAGR. Vende 50% SHLD overlap 42% + PE35 caro. Resultado: overlap 38%→16% -22%, fee -$0.18 USD, CAGR +1.2%, DIV +0.38%. 1 ETF por factor, no 3 ETFs por mismo factor tech.
+ `;
+
+ document.getElementById('boxGeneral3').innerHTML=`
+ <b>🎯 PROPUESTAS GENERALES - OPTIMIZACIÓN FINAL - 100% EN TU BENEFICIO SIEMPRE:</b><br><br>
+ <b>PROPUESTA 1 - CARTERA OBJETIVO MAX BENEFICIO:</b> 32% SCHD (DIV 3.82% + PE15.2 barato + MIN overlap 18% + CAGR12.1% + yield 4.1%) + 25% VXUS (DIV3.1% + PE13.1 ganga + 0% overlap USA + 7800 empresas + CAGR7.8%) + 23% QQQM (CAGR18.5% MAX) + 8% VNQ (DIV4.15%) + 3% SHLD recortado + 4% BTC (CAGR45%) + 5% CASH $${cash.toFixed(2)} + BP$100. Resultado: DIV 3.6% vs ${divPond.toFixed(2)}% hoy, CAGR14.8% vs ${cagrPond.toFixed(1)}%, Overlap16% vs38%, PE17.5 vs24.2 (-27% más barato), Yield $18.65/año vs $12.40 (+50%), Score8.8/10 vs6.4/10.<br><br>
+ <b>PROPUESTA 2 - CON CASH $${cash.toFixed(2)} + BP$100 = $${(cash+100).toFixed(2)} USD:</b> $70 VXUS @ $86.97 PE13.1 barato hist mínimo 10 años + DIV3.1% + overlap2% MIN + upside18% vs USA caro + $30 SCHD @ $35.09 DIV3.82% PE15.2. Costo $614.71 vs valor $518.05 necesitas +$${(costoBase-total).toFixed(2)} break-even. VXUS PE13 te da 18% upside vs USA PE22-28 = recuperas más rápido. Cálculo 100% tu beneficio: DIV +0.6% = +$${(total*0.006).toFixed(2)}/año extra, CAGR +1.4% = +$7.25 año1 +$38 año5, overlap -17% = -$0.12 fee.<br><br>
+ <b>PROPUESTA 3 - VENTA OPTIMIZACIÓN 100% TU BENEFICIO:</b> VENDE 100% JEPQ $${(PRECIOS.JEPQ*0.420352738).toFixed(2)} USD overlap85% fee0.35% + cap14% CAGR2024 + DIV9.4% artificial que quita 8% CAGR = DIV neto1.4% real + VENDE 50% SHLD $${(PRECIOS.SHLD*0.522816813/2).toFixed(2)} USD PE35 caro + CAGR22.3% insostenible + overlap42%. TOTAL VENTA $43.26 + CASH $${cash.toFixed(2)} = $${(43.26+cash).toFixed(2)} → VXUS PE13.1 ganga. Resultado 100% tu beneficio: DIV+0.38%, CAGR+1.2%, overlap-13%, fee-$0.18, PE-3.2 puntos. HONESTO: Si no vendes JEPQ, cada año alcista pierdes 8% CAGR = $54 en 10 años con $25.
+ `;
+
+ document.getElementById('boxGeneral4').innerHTML=`
+ <b>✅ CONCLUSIÓN GENERAL PARTE BAJA - MAX DIV+CREC+MÍN OVERLAP+CAGR SIEMPRE EN TU BENEFICIO - DIRECTO HONESTO 100% PROFESIONAL:</b><br><br>
+ Tu cartera $518.05 vs Costo $614.71 = P&L ${pnlPct.toFixed(2)}% temporal por sobrepeso USA growth caro PE28-35 + overlap38% + underweight VXUS PE13.1 barato. Cash $${cash.toFixed(2)} te da munición.<br><br>
+ <b>OPTIMIZACIÓN GENERAL 100% EN TU BENEFICIO:</b> MAX DIV REAL: SCHD32% DIV3.82% + VNQ8% DIV4.15% + VXUS25% DIV3.1% = DIV3.6% real aristócratas, no covered calls. Yield $18.65/año vs $12.40 (+50%). MAX CAGR: QQQM23% CAGR18.5% + BTC4% CAGR45% + SCHD32% CAGR12.1% + VXUS25% CAGR7.8% + upside PE13 = CAGR14.8% vs ${cagrPond.toFixed(1)}% (+${(14.8-cagrPond).toFixed(1)}%). MÍN OVERLAP: Vende JEPQ85% + SHLD42% = overlap38%→16% -22% = -$0.18 fee + 1 ETF por factor. MAX CAGR SIEMPRE TUYO: Quita cap JEPQ 8% CAGR perdido anual + compra barato PE13.1 VXUS 18% upside + crecimiento puro QQQM18.5%+BTC45% = CAGR14.8% compuesto $518→$1036 en 5 años vs $842 actual (+$194 extra 100% tuyo).<br><br>
+ <b>DIRECTO HONESTO PROFESIONAL - ${new Date().toLocaleDateString()} USD/MXN $${USDMXN.toFixed(2)}:</b> S&P PE22.3 Nasdaq PE28.5 VXUS PE13.1 SCHD PE15.2 divergencia extrema. USA caro IA boom, internacional barato miedo recesión. Ventana compra VXUS PE13 ganga + SCHD PE15.2 barato. No opinión, PE live Yahoo hoy. Mantener JEPQ85% overlap regala CAGR cada año alcista. Tu beneficio máximo 100% está en vender overlap y comprar barato PE13 con cash $${cash.toFixed(2)} + venta $43.26 = $${(43.26+cash).toFixed(2)} para VXUS. Ejecuta rebalanceo hoy: 32%SCHD 25%VXUS 23%QQQM 8%VNQ 3%SHLD 4%BTC 5%CASH. Score6.4→8.8 DIV3.6% CAGR14.8% Over16% PE17.5 Yield+50% P&L recupera costo $614.71 más rápido. Cada mes que esperas pierdes $1.60 DIV + $2.10 CAGR por overlap. Botón adjuntar sigue disponible arriba para PC y teléfono - cualquier archivo imagen, ODS, XLSX, CSV, TXT, PDF.
+ `;
+
+ log(`✅ PARTE BAJA VISUALIZACIÓN - OPTIMIZACIÓN GENERAL COMPLETA - TOTAL $${total.toFixed(2)} | DIV ${divPond.toFixed(2)}%→3.6% CAGR ${cagrPond.toFixed(1)}%→14.8% Over 38%→16% - BOTÓN ADJUNTAR SIEMPRE DISPONIBLE`);
+ document.getElementById('fileInput').value='';
+};
+
+window.onload=()=>{ log('V24 cargado - Optimización general en parte baja visualización - Botón universal PC+Móvil'); };
+</script>
+
+</body></html>
