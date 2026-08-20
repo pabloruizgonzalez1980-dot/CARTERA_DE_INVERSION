@@ -1,71 +1,87 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Mi Asistente Personal IA</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
-body{background:#0f172a;color:#e2e8f0;min-height:100vh;display:flex;flex-direction:column}
-.header{padding:20px;text-align:center;background:#1e293b;border-bottom:1px solid #334155}
-.p-btn{padding:8px 16px;border-radius:20px;border:1px solid #334155;background:#1e293b;color:#94a3b8;cursor:pointer;margin:3px}
-.p-btn.active{background:#0ea5e9;color:#fff}
-.modes{padding:12px;background:#1e293b;display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.m-btn{padding:14px;border-radius:12px;border:1px solid #334155;background:#0f172a;color:#cbd5e1;cursor:pointer;font-weight:600}
-.m-btn.active{background:#22d3ee;color:#0f172a}
-.chat{flex:1;padding:16px;display:flex;flex-direction:column;gap:12px;overflow-y:auto}
-.msg{padding:12px 16px;border-radius:18px;max-width:90%;font-size:15px;line-height:1.5;white-space:pre-wrap}
-.bot{background:#1e293b;align-self:flex-start;border:1px solid #334155}
-.user{background:#2563eb;align-self:flex-end;color:#fff}
-.system{background:#334155;align-self:center;font-size:12px;padding:6px 12px;border-radius:20px;color:#94a3b8}
-.input-area{padding:12px;background:#1e293b;display:flex;gap:8px;border-top:1px solid #334155}
-.input-area input{flex:1;padding:14px;border-radius:12px;border:1px solid #334155;background:#0f172a;color:#fff;outline:none}
-.btn-mic{background:#334155;border:none;padding:14px 16px;border-radius:12px;cursor:pointer;font-size:18px}
-.btn-mic.active{background:#ef4444;animation:pulse 1s infinite}
-.btn-send{background:#22c55e;border:none;padding:14px 20px;border-radius:12px;font-weight:800;cursor:pointer}
-.status{text-align:center;padding:8px;color:#22c55e;font-size:12px}
-@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.1)}100%{transform:scale(1)}}
-</style>
-</head>
-<body>
-<div class="header">
-<h1>🧠 Mi Asistente Personal IA</h1>
-<p style="margin:10px 0 8px;color:#94a3b8;font-size:13px">Perfil:</p>
-<div>
-<button class="p-btn active" onclick="setProfile('Adriana',this)">Adriana</button>
-<button class="p-btn" onclick="setProfile('Adrián',this)">Adrián</button>
-<button class="p-btn" onclick="setProfile('Familia',this)">Familia</button>
-<button class="p-btn" onclick="setProfile('Pablo',this)">Pablo</button>
-</div>
-</div>
-<div class="modes">
-<button class="m-btn" id="btn-conversar" onclick="setMode('Conversar')">💬 Conversar</button>
-<button class="m-btn" id="btn-ansiedad" onclick="setMode('Ansiedad')">🌿 Ansiedad</button>
-<button class="m-btn" id="btn-toc" onclick="setMode('TOC')">🧠 TOC</button>
-<button class="m-btn active" id="btn-familia" onclick="setMode('Familia')">❤️ Familia</button>
-</div>
-<div class="chat" id="chat">
-<div class="msg bot">¡Hola! Soy tu asistente. Micrófono 🎤 habilitado para PC y teléfono. Perfil: <b id="perfil-txt">Adriana</b> | Modo: <b id="modo-txt">Familia</b></div>
-</div>
-<div class="input-area">
-<button class="btn-mic" id="mic" onclick="toggleMic()">🎤</button>
-<input id="input" placeholder="Escribe o habla..." onkeypress="if(event.key==='Enter')send()">
-<button class="btn-send" onclick="send()">Enviar</button>
-</div>
-<div class="status">● Con micrófono activado - Funciona en PC y Celular</div>
+<!-- BOTÓN DE MICRÓFONO -->
+<button
+  class="btn-mic"
+  id="mic"
+  onclick="toggleMic()"
+  type="button"
+  title="Hablar">
+  🎤
+</button>
+
 <script>
-let perfil='Adriana', modo='Familia', rec, listening=false;
-function setProfile(p,el){perfil=p;document.querySelectorAll('.p-btn').forEach(b=>b.classList.remove('active'));el.classList.add('active');document.getElementById('perfil-txt').textContent=p;addSystem('Perfil: '+p);}
-function setMode(m){modo=m;document.querySelectorAll('.m-btn').forEach(b=>b.classList.remove('active'));document.getElementById('btn-'+m.toLowerCase()).classList.add('active');document.getElementById('modo-txt').textContent=m;addSystem('Modo: '+m);}
-function addSystem(t){const c=document.getElementById('chat');const d=document.createElement('div');d.className='msg system';d.textContent=t;c.appendChild(d);c.scrollTop=c.scrollHeight;}
-function addBot(t){const c=document.getElementById('chat');const d=document.createElement('div');d.className='msg bot';d.innerHTML=t;c.appendChild(d);c.scrollTop=c.scrollHeight;}
-function addUser(t){const c=document.getElementById('chat');const d=document.createElement('div');d.className='msg user';d.textContent=t;c.appendChild(d);c.scrollTop=c.scrollHeight;}
-function getR(tx){const t=tx.toLowerCase();if(t.includes('toc'))return `🧠 <b>TOC para ${perfil}:</b><br>Obsesiones + compulsiones. No es tu culpa. Pasos: 1.Nombra "es TOC" 2.No discutas 3.Retrasa 5 min`;if(t.includes('ansiedad'))return `🌿 <b>Ansiedad ${perfil}:</b><br>Respira 4-2-6 x4 veces. Técnica 5-4-3-2-1. Agua fría.`;if(t.includes('familia'))return `❤️ <b>Familia:</b><br>Usa "Me siento... cuando... necesito..."`;return `Gracias ${perfil} (${modo}): "${tx}"<br>Te escucho sin juzgar.`;}
-function send(){const i=document.getElementById('input');const tx=i.value.trim();if(!tx)return;addUser(tx);i.value='';setTimeout(()=>addBot(getR(tx)),500);}
-function toggleMic(){
- if(!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)){alert('Tu navegador no soporta micrófono. Usa Chrome en PC o Android.');return;}
- if(!rec){const SR=window.SpeechRecognition||window.webkitSpeechRecognition;rec=new SR();rec.lang='es-MX';rec.continuous=false;rec.onresult=e=>{document.getElementById('input').value=e.results[0][0].transcript;send();};rec.onend=()=>{listening=false;document.getElementById('mic').classList.remove('active');};}
- if(!listening){rec.start();listening=true;document.getElementById('mic').classList.add('active');}else{rec.stop();}
+let rec = null;
+let listening = false;
+
+function toggleMic() {
+
+  const SpeechRecognition =
+    window.SpeechRecognition ||
+    window.webkitSpeechRecognition;
+
+  if (!SpeechRecognition) {
+    alert(
+      "El reconocimiento de voz no está disponible en este navegador. " +
+      "Prueba Chrome en PC o Android."
+    );
+    return;
+  }
+
+  if (!rec) {
+
+    rec = new SpeechRecognition();
+
+    rec.lang = "es-MX";
+    rec.continuous = false;
+    rec.interimResults = false;
+
+    rec.onstart = function () {
+      listening = true;
+
+      document.getElementById("mic")
+        .classList.add("active");
+
+      document.getElementById("status").textContent =
+        "🔴 Escuchando... habla ahora";
+    };
+
+    rec.onresult = function (event) {
+
+      const texto =
+        event.results[0][0].transcript;
+
+      document.getElementById("input").value = texto;
+
+      // Envía automáticamente el texto
+      send();
+    };
+
+    rec.onerror = function () {
+
+      listening = false;
+
+      document.getElementById("mic")
+        .classList.remove("active");
+
+      document.getElementById("status").textContent =
+        "⚠️ No se pudo utilizar el micrófono";
+    };
+
+    rec.onend = function () {
+
+      listening = false;
+
+      document.getElementById("mic")
+        .classList.remove("active");
+
+      document.getElementById("status").textContent =
+        "● Micrófono listo";
+    };
+  }
+
+  if (!listening) {
+    rec.start();
+  } else {
+    rec.stop();
+  }
 }
 </script>
-</body>
-</html>
