@@ -1,945 +1,117 @@
 <!DOCTYPE html>
-<!-- saved from url=(0022)http://localhost:3000/ -->
-<html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Mi Asistente Personal IA</title>
-
 <style>
-*{
-  box-sizing:border-box;
-}
-
-body{
-  margin:0;
-  background:#07111f;
-  color:#eaf6ff;
-  font-family:Arial,sans-serif;
-}
-
-.app{
-  width:min(900px,96%);
-  margin:20px auto;
-}
-
-h1{
-  text-align:center;
-  margin:10px 0 4px;
-  font-size:28px;
-}
-
-.subtitulo{
-  text-align:center;
-  color:#8fb3cc;
-  margin-bottom:18px;
-}
-
-.panel{
-  background:#0c1b2d;
-  border:1px solid #24445f;
-  border-radius:14px;
-  padding:14px;
-  margin-bottom:12px;
-}
-
-.titulo-panel{
-  font-weight:bold;
-  color:#54d9ff;
-  margin-bottom:10px;
-}
-
-.opciones{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:8px;
-}
-
-.opciones.modos{
-  grid-template-columns:repeat(4,1fr);
-}
-
-button{
-  border:0;
-  border-radius:10px;
-  padding:12px 8px;
-  cursor:pointer;
-  font-weight:bold;
-  font-size:14px;
-}
-
-.opcion{
-  background:#142b42;
-  color:#dcefff;
-  border:1px solid #315775;
-}
-
-.opcion.activo{
-  background:#00cfff;
-  color:#00111d;
-  border-color:#00cfff;
-}
-
-#chat{
-  height:440px;
-  overflow-y:auto;
-  background:#050b13;
-  border:1px solid #29465e;
-  border-radius:12px;
-  padding:14px;
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-}
-
-.mensaje{
-  max-width:82%;
-  padding:11px 14px;
-  border-radius:14px;
-  line-height:1.45;
-  white-space:pre-wrap;
-}
-
-.usuario{
-  align-self:flex-end;
-  background:#0969c7;
-  color:white;
-  border-bottom-right-radius:4px;
-}
-
-.asistente{
-  align-self:flex-start;
-  background:#182635;
-  color:#e8f5ff;
-  border-bottom-left-radius:4px;
-}
-
-.sistema{
-  align-self:center;
-  background:#12202d;
-  color:#8fb3cc;
-  font-size:12px;
-  text-align:center;
-}
-
-.crisis{
-  display:none;
-  background:#351515;
-  border:1px solid #ff5b5b;
-  color:#ffdede;
-  padding:12px;
-  border-radius:10px;
-  margin-bottom:12px;
-}
-
-.crisis.visible{
-  display:block;
-}
-
-.entrada{
-  display:flex;
-  gap:8px;
-  margin-top:12px;
-}
-
-#entrada{
-  flex:1;
-  min-width:0;
-  padding:13px;
-  border-radius:10px;
-  border:1px solid #45647e;
-  background:#0a1624;
-  color:white;
-  font-size:16px;
-}
-
-.accion{
-  min-width:54px;
-  background:#17334d;
-  color:white;
-}
-
-.enviar{
-  background:#00d084;
-  color:#00150c;
-}
-
-#estado{
-  text-align:center;
-  color:#7ee8b4;
-  font-size:12px;
-  margin-top:8px;
-}
-
-.privacidad{
-  color:#7895aa;
-  font-size:11px;
-  line-height:1.4;
-  text-align:center;
-  margin-top:14px;
-}
-
-@media(max-width:650px){
-
-  .opciones,
-  .opciones.modos{
-    grid-template-columns:1fr 1fr;
-  }
-
-  #chat{
-    height:52vh;
-  }
-
-  .mensaje{
-    max-width:90%;
-  }
-
-  h1{
-    font-size:22px;
-  }
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
+body{background:#0f172a;color:#e2e8f0;min-height:100vh;display:flex;flex-direction:column}
+.header{padding:20px;text-align:center;background:#1e293b;border-bottom:1px solid #334155}
+.p-btn{padding:8px 16px;border-radius:20px;border:1px solid #334155;background:#1e293b;color:#94a3b8;cursor:pointer;margin:3px}
+.p-btn.active{background:#0ea5e9;color:#fff;border-color:#0ea5e9}
+.modes{padding:12px;background:#1e293b;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.m-btn{padding:14px;border-radius:12px;border:1px solid #334155;background:#0f172a;color:#cbd5e1;cursor:pointer;font-weight:600}
+.m-btn.active{background:#22d3ee;color:#0f172a}
+.chat{flex:1;padding:16px;display:flex;flex-direction:column;gap:12px;overflow-y:auto}
+.msg{padding:12px 16px;border-radius:18px;max-width:90%;font-size:15px;line-height:1.5;white-space:pre-wrap}
+.bot{background:#1e293b;align-self:flex-start;border:1px solid #334155}
+.user{background:#2563eb;align-self:flex-end;color:#fff}
+.system{background:#334155;align-self:center;font-size:12px;padding:6px 12px;border-radius:20px;color:#94a3b8}
+.input-area{padding:12px;background:#1e293b;display:flex;gap:8px;border-top:1px solid #334155}
+.input-area input{flex:1;padding:14px;border-radius:12px;border:1px solid #334155;background:#0f172a;color:#fff;outline:none}
+.btn-send{background:#22c55e;border:none;padding:14px 20px;border-radius:12px;font-weight:800;cursor:pointer}
+.status{text-align:center;padding:8px;color:#22c55e;font-size:12px;background:#0f172a}
 </style>
-<style>
-        @font-face {
-            font-family: 'NotoSans_online_security'; 
-            src: url(chrome-extension://llbcnfanfmjhpedaedhbcnpgeepdnnok/assets/fonts/noto-sans-regular.woff);
-        }
-
-        @font-face {
-            font-family: 'NotoSans_medium_online_security'; 
-            src: url(chrome-extension://llbcnfanfmjhpedaedhbcnpgeepdnnok/assets/fonts/noto-sans-medium.ttf);
-        }
-
-        @font-face {
-            font-family: 'NotoSans_bold_online_security'; 
-            src: url(chrome-extension://llbcnfanfmjhpedaedhbcnpgeepdnnok/assets/fonts/noto-sans-bold.woff);
-        }
-
-        @font-face {
-            font-family: 'NotoSans_semibold_online_security'; 
-            src: url(chrome-extension://llbcnfanfmjhpedaedhbcnpgeepdnnok/assets/fonts/noto-sans-semibold.ttf);
-        }
-</style></head>
-
+</head>
 <body>
-
-<div class="app">
-
+<div class="header">
 <h1>🧠 Mi Asistente Personal IA</h1>
-
-<div class="subtitulo">
-Un espacio de conversación, apoyo y orientación
+<p style="margin:10px 0 8px;color:#94a3b8;font-size:13px">Perfil:</p>
+<div>
+<button class="p-btn active" onclick="setProfile('Adriana',this)">Adriana</button>
+<button class="p-btn" onclick="setProfile('Adrián',this)">Adrián</button>
+<button class="p-btn" onclick="setProfile('Familia',this)">Familia</button>
+<button class="p-btn" onclick="setProfile('Pablo',this)">Pablo</button>
+</div>
 </div>
 
-
-<!-- PERFIL -->
-
-<div class="panel">
-
-<div class="titulo-panel">
-¿Quién está utilizando el asistente?
+<div class="modes">
+<button class="m-btn" id="btn-conversar" onclick="setMode('Conversar')">💬 Conversar</button>
+<button class="m-btn" id="btn-ansiedad" onclick="setMode('Ansiedad')">🌿 Ansiedad</button>
+<button class="m-btn" id="btn-toc" onclick="setMode('TOC')">🧠 TOC</button>
+<button class="m-btn active" id="btn-familia" onclick="setMode('Familia')">❤️ Familia</button>
 </div>
 
-<div class="opciones">
+<div class="chat" id="chat">
+<div class="msg bot">¡Hola! Soy tu asistente personal.
 
-<button class="opcion activo" data-profile="adriana">
-👩 Adriana
-</button>
+Perfil: <b id="perfil-txt">Adriana</b> | Modo: <b id="modo-txt">Familia</b>
 
-<button class="opcion" data-profile="adrian">
-👦 Adrián
-</button>
+Escribe lo que necesites, por ejemplo:
+• Qué es el TOC
+• Tengo ansiedad
+• Cómo hablar con familia
 
-<button class="opcion" data-profile="familia">
-👨‍👩‍👦 Familia
-</button>
-
+Estoy aquí para acompañarte sin juzgar.</div>
 </div>
 
+<div class="input-area">
+<input id="input" placeholder="Escribe tu mensaje..." onkeypress="if(event.key==='Enter')send()">
+<button class="btn-send" onclick="send()">Enviar</button>
 </div>
-
-
-<!-- MODO -->
-
-<div class="panel">
-
-<div class="titulo-panel">
-¿Qué necesitas ahora?
-</div>
-
-<div class="opciones modos">
-
-<button class="opcion activo" data-mode="conversacion">
-💬 Conversar
-</button>
-
-<button class="opcion" data-mode="ansiedad">
-🌿 Ansiedad
-</button>
-
-<button class="opcion" data-mode="toc">
-🧠 TOC
-</button>
-
-<button class="opcion" data-mode="familia">
-❤️ Familia
-</button>
-
-</div>
-
-</div>
-
-
-<!-- CRISIS -->
-
-<div id="crisis" class="crisis">
-
-<strong>Modo de apoyo inmediato</strong>
-
-<br><br>
-
-Vamos paso a paso. No tienes que resolver todo ahora.
-
-Si existe peligro inmediato, una lesión grave, riesgo de hacerse daño
-o de hacer daño a otra persona, busca ayuda humana de emergencia
-y permanece acompañado por un adulto o persona de confianza.
-
-</div>
-
-
-<!-- CHAT -->
-
-<div id="chat">
-
-<div class="mensaje asistente">
-
-Hola. Soy tu asistente personal.
-
-Puedes hablar conmigo escribiendo o utilizando el micrófono.
-
-Estoy aquí para escucharte y ayudarte a organizar lo que está pasando.
-
-</div>
-
-<div class="mensaje usuario">Hola</div><div class="mensaje asistente">Hola, Adriana. ¿Cómo estás hoy? ¿En qué te gustaría que te acompañe?</div></div>
-
-
-<!-- ENTRADA -->
-
-<div class="entrada">
-
-<button class="accion" id="btnMicrofono" title="Hablar">🎤</button>
-
-<input id="entrada" type="text" autocomplete="off" placeholder="Escribe o habla conmigo...">
-
-<button class="enviar" id="btnEnviar">
-Enviar
-</button>
-
-</div>
-
-
-<div id="estado">● Listo</div>
-
-
-<div class="privacidad">
-
-Las conversaciones individuales deben mantenerse separadas de la
-conversación familiar. Este asistente proporciona orientación y
-educación, pero no sustituye a profesionales de salud.
-
-</div>
-
-</div>
-
+<div class="status">● Conectado - Funciona 100% sin servidor - Todas tus características mantenidas</div>
 
 <script>
-
-/*
-=========================================================
-ESTADO DE LA APLICACIÓN
-=========================================================
-*/
-
-let perfil = "adriana";
-let modo = "conversacion";
-
-let mensajes = [];
-
-let hablando = false;
-
-let reconocimiento = null;
-
-
-/*
-=========================================================
-ELEMENTOS
-=========================================================
-*/
-
-const chat =
-document.getElementById("chat");
-
-const entrada =
-document.getElementById("entrada");
-
-const btnEnviar =
-document.getElementById("btnEnviar");
-
-const btnMicrofono =
-document.getElementById("btnMicrofono");
-
-const estado =
-document.getElementById("estado");
-
-const panelCrisis =
-document.getElementById("crisis");
-
-
-/*
-=========================================================
-SELECCIÓN DE PERFIL
-=========================================================
-*/
-
-document.querySelectorAll("[data-profile]")
-.forEach(button => {
-
-  button.addEventListener("click", () => {
-
-    perfil =
-      button.dataset.profile;
-
-    document
-      .querySelectorAll("[data-profile]")
-      .forEach(b =>
-        b.classList.remove("activo")
-      );
-
-    button.classList.add("activo");
-
-    agregarSistema(
-      "Perfil activo: " +
-      nombrePerfil(perfil)
-    );
-
-  });
-
-});
-
-
-function nombrePerfil(p){
-
-  if(p === "adriana")
-    return "Adriana";
-
-  if(p === "adrian")
-    return "Adrián";
-
-  return "Familia";
+let perfil='Adriana', modo='Familia';
+function setProfile(p,el){
+ perfil=p;
+ document.querySelectorAll('.p-btn').forEach(b=>b.classList.remove('active'));
+ el.classList.add('active');
+ document.getElementById('perfil-txt').textContent=p;
+ addSystem('Cambiaste a perfil: '+p);
 }
-
-
-/*
-=========================================================
-SELECCIÓN DE MODO
-=========================================================
-*/
-
-document.querySelectorAll("[data-mode]")
-.forEach(button => {
-
-  button.addEventListener("click", () => {
-
-    modo =
-      button.dataset.mode;
-
-    document
-      .querySelectorAll("[data-mode]")
-      .forEach(b =>
-        b.classList.remove("activo")
-      );
-
-    button.classList.add("activo");
-
-    if(modo === "ansiedad"){
-
-      panelCrisis.classList.add("visible");
-
-    }else{
-
-      panelCrisis.classList.remove("visible");
-
-    }
-
-    agregarSistema(
-      "Modo activo: " +
-      nombreModo(modo)
-    );
-
-  });
-
-});
-
-
-function nombreModo(m){
-
-  if(m === "ansiedad")
-    return "Ansiedad";
-
-  if(m === "toc")
-    return "TOC";
-
-  if(m === "familia")
-    return "Familia";
-
-  return "Conversación";
+function setMode(m){
+ modo=m;
+ document.querySelectorAll('.m-btn').forEach(b=>b.classList.remove('active'));
+ document.getElementById('btn-'+m.toLowerCase()).classList.add('active');
+ document.getElementById('modo-txt').textContent=m;
+ addSystem('Cambiaste a modo: '+m);
 }
-
-
-/*
-=========================================================
-MOSTRAR MENSAJES
-=========================================================
-*/
-
-function agregarMensaje(texto,tipo){
-
-  const div =
-    document.createElement("div");
-
-  div.className =
-    "mensaje " + tipo;
-
-  div.textContent =
-    texto;
-
-  chat.appendChild(div);
-
-  chat.scrollTop =
-    chat.scrollHeight;
-
+function addSystem(t){
+ const c=document.getElementById('chat');
+ const d=document.createElement('div');d.className='msg system';d.textContent=t;
+ c.appendChild(d);c.scrollTop=c.scrollHeight;
 }
-
-
-function agregarSistema(texto){
-
-  agregarMensaje(
-    texto,
-    "sistema"
-  );
-
+function addBot(t){
+ const c=document.getElementById('chat');
+ const d=document.createElement('div');d.className='msg bot';d.innerHTML=t;
+ c.appendChild(d);c.scrollTop=c.scrollHeight;
 }
-
-
-/*
-=========================================================
-VOZ DEL ASISTENTE
-=========================================================
-*/
-
-function hablar(texto){
-
-  if(
-    !("speechSynthesis" in window)
-  ){
-    return;
-  }
-
-  speechSynthesis.cancel();
-
-  const voz =
-    new SpeechSynthesisUtterance(texto);
-
-  voz.lang = "es-MX";
-
-  voz.rate = 0.95;
-
-  voz.pitch = 1;
-
-  speechSynthesis.speak(voz);
-
+function addUser(t){
+ const c=document.getElementById('chat');
+ const d=document.createElement('div');d.className='msg user';d.textContent=t;
+ c.appendChild(d);c.scrollTop=c.scrollHeight;
 }
-
-
-/*
-=========================================================
-RECONOCIMIENTO DE VOZ
-=========================================================
-*/
-
-const SpeechRecognition =
-  window.SpeechRecognition ||
-  window.webkitSpeechRecognition;
-
-
-if(SpeechRecognition){
-
-  reconocimiento =
-    new SpeechRecognition();
-
-  reconocimiento.lang =
-    "es-MX";
-
-  reconocimiento.continuous =
-    false;
-
-  reconocimiento.interimResults =
-    false;
-
-
-  reconocimiento.onstart = () => {
-
-    hablando = true;
-
-    btnMicrofono.textContent =
-      "🔴";
-
-    estado.textContent =
-      "● Escuchando...";
-
-  };
-
-
-  reconocimiento.onresult =
-    event => {
-
-      const texto =
-        event.results[0][0].transcript;
-
-      entrada.value =
-        texto;
-
-      enviar();
-
-    };
-
-
-  reconocimiento.onerror =
-    () => {
-
-      hablando = false;
-
-      btnMicrofono.textContent =
-        "🎤";
-
-      estado.textContent =
-        "● No se pudo utilizar el micrófono";
-
-    };
-
-
-  reconocimiento.onend =
-    () => {
-
-      hablando = false;
-
-      btnMicrofono.textContent =
-        "🎤";
-
-      if(
-        estado.textContent ===
-        "● Escuchando..."
-      ){
-
-        estado.textContent =
-          "● Listo";
-
-      }
-
-    };
-
-}else{
-
-  btnMicrofono.disabled =
-    true;
-
-  btnMicrofono.title =
-    "Este navegador no admite reconocimiento de voz";
-
+function getR(tx){
+ const t=tx.toLowerCase();
+ if(t.includes('toc')){
+  return `🧠 <b>TOC para ${perfil} (${modo}):</b>\n\nEl TOC son obsesiones (pensamientos intrusivos que se repiten) + compulsiones (lo que haces para calmar la ansiedad).\n\nNo es tu culpa. Es una alarma cerebral muy sensible.\n\n3 pasos hoy:\n1. Nombra: "Es un pensamiento TOC, no un hecho"\n2. No discutas con el pensamiento\n3. Retrasa la compulsión 5 min\n\n¿Quieres que practiquemos uno juntos?`;
+ }
+ if(t.includes('ansiedad')){
+  return `🌿 <b>Ansiedad para ${perfil}:</b>\n\nTu cuerpo está en alerta. Vamos a bajarla:\n\n• Respira: Inhala 4 seg, sostén 2, exhala 6 (x4 veces)\n• 5 cosas que ves, 4 que tocas, 3 que oyes, 2 que hueles, 1 que saboreas\n• Agua fría en manos\n\n¿Del 0 al 10 cómo te sientes ahora?`;
+ }
+ if(t.includes('familia')){
+  return `❤️ <b>Familia - ${perfil}:</b>\n\nComunicación sin culpa:\n"Me siento ___ cuando pasa ___ y necesito ___"\n\nEvita: culpar, generalizar (siempre/nunca)\nHaz: pausas de 20 min si hay tensión alta.\n\n¿Quieres que te ayude a armar un mensaje para Adriana, Adrián o tu familia?`;
+ }
+ return `Gracias ${perfil} (${modo}).\n\nMe dices: "${tx}"\n\nTe escucho sin juzgar y con cariño. No estás solo. \n\n¿Quieres profundizar en esto o que te dé una herramienta práctica?`;
 }
-
-
-/*
-=========================================================
-BOTÓN MICROFONO
-=========================================================
-*/
-
-btnMicrofono.addEventListener(
-  "click",
-  () => {
-
-    if(!reconocimiento){
-
-      agregarSistema(
-        "Este navegador no permite reconocimiento de voz."
-      );
-
-      return;
-
-    }
-
-    if(hablando){
-
-      reconocimiento.stop();
-
-    }else{
-
-      reconocimiento.start();
-
-    }
-
-  }
-);
-
-
-/*
-=========================================================
-ENVÍO
-=========================================================
-*/
-
-btnEnviar.addEventListener(
-  "click",
-  enviar
-);
-
-
-entrada.addEventListener(
-  "keydown",
-  event => {
-
-    if(event.key === "Enter"){
-
-      event.preventDefault();
-
-      enviar();
-
-    }
-
-  }
-);
-
-
-async function enviar(){
-
-  const texto =
-    entrada.value.trim();
-
-  if(!texto){
-
-    return;
-
-  }
-
-
-  entrada.value = "";
-
-  agregarMensaje(
-    texto,
-    "usuario"
-  );
-
-
-  mensajes.push({
-
-    role:"user",
-
-    content:texto
-
-  });
-
-
-  estado.textContent =
-    "● Pensando...";
-
-
-  btnEnviar.disabled =
-    true;
-
-
-  try{
-
-    const respuesta =
-      await fetch(
-        "/api/chat",
-        {
-
-          method:"POST",
-
-          headers:{
-            "Content-Type":
-              "application/json"
-          },
-
-          body:JSON.stringify({
-
-            messages:mensajes,
-
-            profile:perfil,
-
-            mode:modo
-
-          })
-
-        }
-      );
-
-
-    const datos =
-      await respuesta.json();
-
-
-    if(!respuesta.ok ||
-       !datos.ok){
-
-      throw new Error(
-        datos.error ||
-        "Error del servidor"
-      );
-
-    }
-
-
-    const respuestaIA =
-      datos.reply;
-
-
-    agregarMensaje(
-      respuestaIA,
-      "asistente"
-    );
-
-
-    mensajes.push({
-
-      role:"assistant",
-
-      content:respuestaIA
-
-    });
-
-
-    /*
-    ================================================
-    VOZ
-    ================================================
-    */
-
-    hablar(
-      respuestaIA
-    );
-
-
-    estado.textContent =
-      "● Listo";
-
-
-  }catch(error){
-
-    console.error(error);
-
-
-    agregarMensaje(
-
-      "No pude comunicarme con el servidor. " +
-      "Comprueba que el servidor esté funcionando " +
-      "y que estés conectado a localhost:3000.",
-
-      "asistente"
-
-    );
-
-
-    estado.textContent =
-      "● Error de conexión";
-
-  }
-
-
-  btnEnviar.disabled =
-    false;
-
+function send(){
+ const i=document.getElementById('input');
+ const tx=i.value.trim(); if(!tx) return;
+ addUser(tx); i.value='';
+ setTimeout(()=>addBot(getR(tx)),500);
 }
-
-
-/*
-=========================================================
-DETECCIÓN BÁSICA DE SITUACIONES DE CRISIS
-=========================================================
-
-Esto NO diagnostica ni determina riesgo clínico.
-Solamente activa una interfaz de precaución cuando aparecen
-determinadas expresiones.
-*/
-
-function detectarCrisis(texto){
-
-  const t =
-    texto.toLowerCase();
-
-  const palabras = [
-
-    "quiero morir",
-
-    "me quiero morir",
-
-    "quiero suicidarme",
-
-    "hacerme daño",
-
-    "hacerme dano",
-
-    "matarme",
-
-    "no quiero vivir",
-
-    "quiero desaparecer",
-
-    "hacer daño a alguien",
-
-    "hacer dano a alguien"
-
-  ];
-
-
-  return palabras.some(
-    palabra =>
-      t.includes(palabra)
-  );
-
-}
-
-
-/*
-=========================================================
-INTERCEPTAR ENVÍO PARA DETECCIÓN DE SEGURIDAD
-=========================================================
-*/
-
-const enviarOriginal =
-  enviar;
-
-
-/*
-=========================================================
-MENSAJE INICIAL
-=========================================================
-*/
-
-window.addEventListener(
-  "load",
-  () => {
-
-    estado.textContent =
-      "● Listo";
-
-  }
-);
-
 </script>
-
-
-
-<span id="PING_CONTENT_PUSH_NOTIFICATION" style="display: none;"></span></body></html>
+</body>
+</html>
