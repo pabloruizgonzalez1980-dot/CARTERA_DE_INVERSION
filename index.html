@@ -1,87 +1,141 @@
-<!-- BOTÓN DE MICRÓFONO -->
-<button
-  class="btn-mic"
-  id="mic"
-  onclick="toggleMic()"
-  type="button"
-  title="Hablar">
-  🎤
-</button>
-
-<script>
-let rec = null;
-let listening = false;
-
-function toggleMic() {
+function toggleMic(){
 
   const SpeechRecognition =
     window.SpeechRecognition ||
     window.webkitSpeechRecognition;
 
-  if (!SpeechRecognition) {
+  // Comprobar compatibilidad
+  if(!SpeechRecognition){
+
     alert(
-      "El reconocimiento de voz no está disponible en este navegador. " +
-      "Prueba Chrome en PC o Android."
+      'El reconocimiento de voz no está disponible ' +
+      'en este navegador. Prueba Google Chrome en PC ' +
+      'o Android.'
     );
+
     return;
   }
 
-  if (!rec) {
+  // Crear reconocimiento una sola vez
+  if(!rec){
 
     rec = new SpeechRecognition();
 
-    rec.lang = "es-MX";
+    rec.lang = 'es-MX';
+
     rec.continuous = false;
+
     rec.interimResults = false;
 
-    rec.onstart = function () {
+    rec.maxAlternatives = 1;
+
+
+    // Cuando comienza a escuchar
+    rec.onstart = function(){
+
       listening = true;
 
-      document.getElementById("mic")
-        .classList.add("active");
+      document
+        .getElementById('mic')
+        .classList.add('active');
 
-      document.getElementById("status").textContent =
-        "🔴 Escuchando... habla ahora";
+      document
+        .querySelector('.status')
+        .textContent =
+        '🔴 Escuchando... habla ahora';
     };
 
-    rec.onresult = function (event) {
+
+    // Cuando reconoce lo que dijo el usuario
+    rec.onresult = function(event){
 
       const texto =
         event.results[0][0].transcript;
 
-      document.getElementById("input").value = texto;
+      document
+        .getElementById('input')
+        .value = texto;
 
-      // Envía automáticamente el texto
+      // Enviar automáticamente el texto
       send();
     };
 
-    rec.onerror = function () {
+
+    // Si ocurre un error
+    rec.onerror = function(event){
+
+      console.log(
+        'Error de reconocimiento:',
+        event.error
+      );
 
       listening = false;
 
-      document.getElementById("mic")
-        .classList.remove("active");
+      document
+        .getElementById('mic')
+        .classList.remove('active');
 
-      document.getElementById("status").textContent =
-        "⚠️ No se pudo utilizar el micrófono";
+      let mensaje =
+        '⚠️ No se pudo utilizar el micrófono';
+
+      if(event.error === 'not-allowed'){
+        mensaje =
+          '⚠️ Permite el acceso al micrófono en tu navegador';
+      }
+
+      if(event.error === 'no-speech'){
+        mensaje =
+          '⚠️ No detecté voz. Intenta nuevamente';
+      }
+
+      document
+        .querySelector('.status')
+        .textContent = mensaje;
     };
 
-    rec.onend = function () {
+
+    // Cuando termina de escuchar
+    rec.onend = function(){
 
       listening = false;
 
-      document.getElementById("mic")
-        .classList.remove("active");
+      document
+        .getElementById('mic')
+        .classList.remove('active');
 
-      document.getElementById("status").textContent =
-        "● Micrófono listo";
+      document
+        .querySelector('.status')
+        .textContent =
+        '● Con micrófono activado - Funciona en PC y celular';
     };
   }
 
-  if (!listening) {
-    rec.start();
-  } else {
+
+  // Iniciar / detener micrófono
+  if(!listening){
+
+    try{
+
+      rec.start();
+
+    }catch(error){
+
+      console.log(error);
+
+    }
+
+  }else{
+
     rec.stop();
+
   }
 }
-</script>
+Y tu botón HTML original se queda exactamente como está:
+
+<button class="btn-mic" id="mic" onclick="toggleMic()">🎤</button>
+Con esto, el flujo es:
+
+🎤 tocar → hablar → se convierte a texto → se coloca en el cuadro → send() envía el mensaje.
+
+Importante: esto hace funcionar voz → texto. No significa todavía que el botón esté conectado a una IA externa; send() seguirá usando la función getR() que ya tienes en tu código.
+
